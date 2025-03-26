@@ -1,45 +1,61 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import React from "react";
+import { Tabs } from "expo-router";
+import { View, Image, StyleSheet, Text } from "react-native";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const _layout = () => {
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+      screenOptions={({ route }) => ({
+        header: () => <Logo />,
+        tabBarStyle: {
+          backgroundColor: "#74ACDA",
+          borderTopRightRadius: 50,
+          borderTopLeftRadius: 50,
+          height: 90.67,
+        },
+        tabBarActiveTintColor: "white",
+        tabBarInactiveTintColor: "#25509A",
+        tabBarShowLabel: true,
+        tabBarLabel: ({ focused }) =>
+          focused ? <Text>{route.name.toUpperCase()}</Text> : null,
+      })}
+    >
       <Tabs.Screen
-        name="index"
+        name="questions"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "ВЪПРОСИ",
+          headerTitleStyle: { color: "white" },
         }}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+      <Tabs.Screen name="opinions" options={{ title: "МНЕНИЯ" }} />
+      <Tabs.Screen name="gifts" options={{ title: "ПОДАРЪЦИ" }} />
+      <Tabs.Screen name="profile" options={{ title: "ПРОФИЛ" }} />
     </Tabs>
   );
-}
+};
+
+const Logo = () => {
+  return (
+    <View style={styles.header}>
+      <Image
+        source={require("../../assets/images/svg/Logo.png")}
+        style={styles.image}
+        resizeMode="contain"
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  header: {
+    height: 150,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+  },
+  image: {
+    height: 85,
+  },
+});
+
+export default _layout;
