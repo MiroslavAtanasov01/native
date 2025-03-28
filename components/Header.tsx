@@ -14,7 +14,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
-    height: 106.67,
+    height: 90,
     backgroundColor: "#25509A",
     alignItems: "center",
     justifyContent: "center",
@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#74ACDA",
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: "bold",
   },
   titleSecond: {
     color: "#fff",
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: "bold",
   },
 });

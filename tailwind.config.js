@@ -12,6 +12,8 @@ module.exports = {
         warning: "#f04134",
         info: "orange",
         tab: "#25509A",
+        customOrange: "#E47E1A",
+        answerbg: "#D7D8D9",
       },
     },
   },

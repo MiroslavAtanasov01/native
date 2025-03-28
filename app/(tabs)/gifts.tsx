@@ -1,16 +1,26 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { View, StyleSheet } from "react-native";
+import GradientButton from "../../components/GradientButton";
 
-const gifts = () => {
+const Gifts = () => {
   return (
-    <View>
-      <Text className="text-lg text-primary font-bold text-lg text-center">
-        gifts
-      </Text>
+    <View style={styles.container}>
+      <GradientButton
+        title="РЕГИСТРАЦИЯ"
+        onPress={() => console.log("Button Pressed")}
+      />
     </View>
   );
 };
 
-export default gifts;
+export default Gifts;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingBottom: 10,
+  },
+});
