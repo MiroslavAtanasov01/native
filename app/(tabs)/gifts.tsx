@@ -1,16 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import GradientButton from "../../components/GradientButton";
 
 const Gifts = () => {
-  return (
-    <View style={styles.container}>
-      <GradientButton
-        title="РЕГИСТРАЦИЯ"
-        onPress={() => console.log("Button Pressed")}
-      />
-    </View>
-  );
+  return <View style={styles.container}></View>;
 };
 
 export default Gifts;

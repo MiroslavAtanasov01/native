@@ -4,6 +4,7 @@ export interface ProfileInfo {
   name: string;
   lastName: string;
   email: string;
+  image: string;
   gender: string;
   age: string;
   monthlyIncome: string;
@@ -11,4 +12,8 @@ export interface ProfileInfo {
   interests: string;
   country: string;
   city: string;
+  district: string;
+  neighborhood: string;
+  street: string;
+  streetNumber: string;
 }
