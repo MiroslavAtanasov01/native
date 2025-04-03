@@ -21,7 +21,7 @@ const preregister = () => {
       />
       <GradientButton
         title="РЕГИСТРАЦИЯ"
-        onPress={() => router.navigate("/register")}
+        onPress={() => router.navigate("/(tabs)/opinions")}
       />
     </View>
   );
