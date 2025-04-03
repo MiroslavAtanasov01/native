@@ -56,6 +56,7 @@ const index = () => {
       <GradientButton
         title="РЕГИСТРИРАЙ СЕ"
         onPress={() => router.navigate("/preregister")}
+        style={{ marginTop: 15, width: "60%", margin: "auto" }}
       />
     </View>
   );
@@ -66,7 +67,7 @@ export default index;
 const styles = StyleSheet.create({
   listItem: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     marginBottom: 10,
   },
   listContainer: {

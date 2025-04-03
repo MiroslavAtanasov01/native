@@ -75,6 +75,7 @@ const _layout = () => {
         name="profile"
         options={{
           title: "ПРОФИЛ",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
               source={ProfileIcon}
