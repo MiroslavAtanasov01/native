@@ -1,11 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Header = () => {
+interface HeaderProps {
+  title: string;
+  subtitle: string;
+}
+
+const Header = ({ title, subtitle }: HeaderProps) => {
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>ГАЛЕРИЯ В ПОДКРЕПА</Text>
-      <Text style={styles.titleSecond}>НА НАШИТЕ ГРАЖДАНИ</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.titleSecond}>{subtitle}</Text>
     </View>
   );
 };

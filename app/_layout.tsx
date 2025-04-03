@@ -9,13 +9,16 @@ export default function RootLayout() {
       <StatusBar barStyle="dark-content" backgroundColor="#e9ebec" />
       <Stack
         screenOptions={{
-          header: () => <Header />,
+          header: () => (
+            <Header title="ГАЛЕРИЯ В ПОДКРЕПА" subtitle="НА НАШИТЕ ГРАЖДАНИ" />
+          ),
         }}
       >
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="preregister" />
         <Stack.Screen name="register" />
+        <Stack.Screen name="Opinion" options={{ headerShown: false }} />
       </Stack>
     </>
   );
