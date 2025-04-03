@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/Colors";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -136,6 +137,15 @@ const styles = StyleSheet.create({
   },
   textSelected: {
     color: "#FFFFFF",
+  },
+  text: {
+    color: Colors.info,
+  },
+  textContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
   },
 });
 

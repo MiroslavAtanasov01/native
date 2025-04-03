@@ -14,6 +14,7 @@ import {
 } from "@/constants/Text";
 import CustomTextInput from "@/components/CustomTextInput";
 import SelectableButtonGroup from "@/components/SelectableButtonGroup";
+import { Image } from "react-native";
 
 const register = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -45,6 +46,8 @@ const register = () => {
           setProfileImage={setProfileImage}
         />
         <Text style={styles.title}>РЕГИСТРАЦИЯ</Text>
+
+        {/* First view */}
         <View style={{ backgroundColor: "#D7D8D9", paddingVertical: 5 }}>
           <View style={styles.inputContainer}>
             <View style={styles.inputSide}>
@@ -77,7 +80,6 @@ const register = () => {
               options={genderOptions}
             />
           </View>
-
           <Text style={styles.label}>ВЪЗРАСТ</Text>
           <View style={styles.optionsContainer}>
             <SelectableButtonGroup
@@ -119,7 +121,10 @@ const register = () => {
               );
             })}
           </View>
+        </View>
 
+        {/* Second view */}
+        <View style={{ backgroundColor: "#D7D8D9", paddingVertical: 5 }}>
           <View style={styles.inputContainer}>
             <View style={styles.inputSide}>
               <Text style={styles.label}>ПРОФЕСИЯ</Text>
@@ -191,6 +196,13 @@ const register = () => {
                 options={genderOptions}
               />
             </View>
+          </View>
+          <View style={styles.textContainer}>
+            <Image
+              style={{ marginRight: 10 }}
+              source={require("./../assets/images/orange-mark.png")}
+            />
+            <Text style={styles.text}>ВАШИТЕ ДАННИ ЩЕ БЪДАТ СКРИТИ</Text>
           </View>
           <View style={styles.inputContainer}>
             <View style={{ width: "70%" }}>
