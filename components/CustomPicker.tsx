@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import styles from "../app/styles/register";
+import styles from "../styles/register";
 import React from "react";
 
 interface CustomPickerProps {

@@ -17,3 +17,16 @@ export interface ProfileInfo {
   street: string;
   streetNumber: string;
 }
+
+interface AnswerOption {
+  id: string; // Unique ID for the answer option (e.g., "opt1", "opt2")
+  text: string; // Text displayed for the answer
+}
+
+export interface Question {
+  campaignId: string;
+  themeId: string;
+  questionId: string;
+  questionText: string;
+  options: AnswerOption[];
+}
