@@ -13,7 +13,7 @@ const opinions = () => {
         style={{ alignSelf: "center", margin: 10 }}
         source={require("../../assets/images/opinions-list.png")}
       ></Image>
-      <Text style={styles.title}>СПОДЕЛЕТЕ СВОЕТО МНЕНИЕ</Text>
+      <Text style={opinionStyles.opinionTitle}>СПОДЕЛЕТЕ СВОЕТО МНЕНИЕ</Text>
       <View
         style={{
           backgroundColor: "#D7D8D9",
@@ -22,7 +22,9 @@ const opinions = () => {
           marginBottom: 10,
         }}
       >
-        //TODO Input text on couple of rows
+        {/* TODO Close keyboard when finish writing.
+         Add counter for letters(10/100).
+         Hide navbar(мнения, профил и т.н) when writing in input */}
         <View>
           <CustomTextInput
             label="ТЕМА"
@@ -58,8 +60,8 @@ const opinions = () => {
 };
 
 export default opinions;
-const styles = StyleSheet.create({
-  title: {
+const opinionStyles = StyleSheet.create({
+  opinionTitle: {
     fontSize: 22,
     fontWeight: "bold",
     color: "#25509A",
