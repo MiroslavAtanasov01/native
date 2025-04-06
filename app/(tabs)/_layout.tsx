@@ -48,6 +48,7 @@ const _layout = () => {
         name="opinions"
         options={{
           title: "МНЕНИЯ",
+          headerShown: false,
           headerTitleStyle: { color: "white" },
           tabBarIcon: ({ focused }) => (
             <Image
