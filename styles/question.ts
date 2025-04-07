@@ -101,6 +101,31 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     backgroundColor: "#252849",
   },
+  optionImageContainer: {
+    width: "100%",
+    height: itemWidth,
+    borderTopRightRadius: 12,
+    borderTopLeftRadius: 12,
+    marginBottom: 5,
+    backgroundColor: "#252849",
+    overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  overlayTextView: {
+    paddingBottom: 3,
+    width: "100%",
+  },
+  overlayText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    textAlign: "center",
+  },
+  innerImage: {
+    width: "70%",
+    height: "60%",
+    resizeMode: "contain",
+  },
 });
 
 export default styles;

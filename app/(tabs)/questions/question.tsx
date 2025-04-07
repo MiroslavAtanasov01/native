@@ -29,7 +29,7 @@ const QuestionScreen = () => {
     // Simulate API call delay
     setTimeout(() => {
       if (index >= 0 && index < SAMPLE_QUESTIONS.length) {
-        setCurrentQuestion(SAMPLE_QUESTIONS[1]);
+        setCurrentQuestion(SAMPLE_QUESTIONS[0]);
         // setCurrentQuestion(SAMPLE_QUESTIONS[index]);
       } else {
         // Handle case where there are no more questions or index is invalid
@@ -131,7 +131,9 @@ const QuestionScreen = () => {
         >
           {currentQuestion.options.map((option) => {
             const isSelected = selectedAnswerId === option.id;
-            const hasImage = !!(option.imageUrl || option.localImageSource);
+            const hasLocalImage = !!option.localImageSource;
+            const hasRemoteImage = !!option.imageUrl;
+            const hasAnyImage = hasLocalImage || hasRemoteImage;
 
             const buttonStyle = useGrid
               ? styles.optionButtonGrid
@@ -147,9 +149,9 @@ const QuestionScreen = () => {
               : styles.optionTextUnselected;
             const iconStyle = useGrid ? styles.iconGrid : styles.icon;
 
-            const imageSource = option.localImageSource
+            const imageSource = hasLocalImage
               ? option.localImageSource
-              : option.imageUrl
+              : hasRemoteImage
               ? { uri: option.imageUrl }
               : null;
 
@@ -165,29 +167,60 @@ const QuestionScreen = () => {
                 accessibilityState={{ checked: isSelected }}
               >
                 {/* === Conditional Rendering for Image Options === */}
-                {useGrid && imageSource && (
-                  <>
-                    <Image
-                      source={imageSource}
-                      style={styles.optionImage}
-                      resizeMode="contain"
-                      onError={(e) =>
-                        console.log(
-                          "Failed to load option image:",
-                          e.nativeEvent.error
-                        )
-                      }
-                    />
-                  </>
-                )}
+                {useGrid &&
+                  imageSource &&
+                  (hasLocalImage ? (
+                    <View style={styles.optionImageContainer}>
+                      <Image
+                        source={imageSource}
+                        style={styles.innerImage}
+                        onError={(e) =>
+                          console.log(
+                            "Failed to load option image:",
+                            e.nativeEvent.error
+                          )
+                        }
+                      />
+                      {/* Overlay Text View */}
+                      {hasLocalImage && option.text && (
+                        <View style={styles.overlayTextView}>
+                          <Text style={styles.overlayText}>{option.text}</Text>
+                        </View>
+                      )}
+                    </View>
+                  ) : (
+                    <>
+                      <Image
+                        source={imageSource}
+                        style={styles.optionImage}
+                        resizeMode="contain"
+                        onError={(e) =>
+                          console.log(
+                            "Failed to load option image:",
+                            e.nativeEvent.error
+                          )
+                        }
+                      />
+                    </>
+                  ))}
 
                 {!useGrid && (
-                  <MaterialCommunityIcons
-                    name={isSelected ? "check-circle" : "circle-outline"}
-                    size={36}
-                    color={isSelected ? "#FFFFFF" : Colors.secondary}
-                    style={iconStyle}
-                  />
+                  <>
+                    <MaterialCommunityIcons
+                      name={isSelected ? "check-circle" : "circle-outline"}
+                      size={36}
+                      color={isSelected ? "#FFFFFF" : Colors.secondary}
+                      style={iconStyle}
+                    />
+                    <Text
+                      style={[
+                        textStyle,
+                        isSelected ? textSelectedStyle : textUnselectedStyle,
+                      ]}
+                    >
+                      {option.text}
+                    </Text>
+                  </>
                 )}
 
                 {/* === Render Text === */}

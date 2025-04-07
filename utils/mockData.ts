@@ -25,23 +25,28 @@ export const SAMPLE_QUESTIONS: Question[] = [
     options: [
       {
         id: "q4_opt1",
-        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+1",
+        imageUrl:
+          "https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg",
       },
       {
         id: "q4_opt2",
-        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+2",
+        imageUrl:
+          "https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg",
       },
       {
         id: "q4_opt3",
-        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+3",
+        imageUrl:
+          "https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg",
       },
       {
         id: "q4_opt4",
-        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+4",
+        imageUrl:
+          "https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg",
       },
       {
         id: "q4_opt5",
-        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+5",
+        imageUrl:
+          "https://i.pinimg.com/736x/a3/31/a8/a331a8d0a8ff50827c6cb3437f336a30.jpg",
       },
       {
         id: "q4_opt6",
