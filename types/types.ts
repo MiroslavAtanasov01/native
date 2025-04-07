@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native";
+
 export type IconType = "heart" | "questionMark";
 
 export interface ProfileInfo {
@@ -19,8 +21,10 @@ export interface ProfileInfo {
 }
 
 interface AnswerOption {
-  id: string; // Unique ID for the answer option (e.g., "opt1", "opt2")
-  text: string; // Text displayed for the answer
+  id: string;
+  text?: string;
+  imageUrl?: string;
+  localImageSource?: ImageSourcePropType;
 }
 
 export interface Question {
@@ -29,4 +33,5 @@ export interface Question {
   questionId: string;
   questionText: string;
   options: AnswerOption[];
+  hasImageOptions?: boolean;
 }

@@ -18,6 +18,40 @@ export const SAMPLE_QUESTIONS: Question[] = [
     ],
   },
   {
+    campaignId: "C002",
+    themeId: "T003",
+    questionId: "Q004",
+    questionText: "ЗА КОГО БИХТЕ ДАЛИ СВОЯТ ГЛАС?",
+    options: [
+      {
+        id: "q4_opt1",
+        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+1",
+      },
+      {
+        id: "q4_opt2",
+        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+2",
+      },
+      {
+        id: "q4_opt3",
+        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+3",
+      },
+      {
+        id: "q4_opt4",
+        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+4",
+      },
+      {
+        id: "q4_opt5",
+        imageUrl: "https://placehold.co/150x150/EFEFEF/grey?text=Img+5",
+      },
+      {
+        id: "q4_opt6",
+        text: "ДРУГИ",
+        localImageSource: require("../assets/images/other.png"),
+      },
+    ],
+    hasImageOptions: true,
+  },
+  {
     campaignId: "C001",
     themeId: "T001",
     questionId: "Q002",

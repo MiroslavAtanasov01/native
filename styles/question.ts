@@ -1,5 +1,10 @@
 import { Colors } from "@/constants/Colors";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const screenWidth = Dimensions.get("window").width;
+// Calculate item width for 3 columns with some spacing
+const itemMargin = 8;
+const itemWidth = (screenWidth - 40 - itemMargin * 4) / 3; // 20 padding each side, margin between items
 
 const styles = StyleSheet.create({
   container: {
@@ -56,6 +61,11 @@ const styles = StyleSheet.create({
   optionsContainer: {
     width: "100%",
   },
+  optionsContainerGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+  },
   optionButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -63,24 +73,33 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 10,
   },
+  optionButtonGrid: {
+    width: itemWidth,
+    margin: itemMargin / 2,
+    borderRadius: 12,
+    alignItems: "center",
+  },
   optionUnselected: {
     backgroundColor: Colors.gray,
   },
   optionSelected: {
     backgroundColor: Colors.primary,
   },
-  icon: {
-    marginRight: 15,
-  },
-  optionText: {
-    fontSize: 18,
-    flexShrink: 1,
-  },
-  optionTextUnselected: {
-    color: "black",
-  },
-  optionTextSelected: {
-    color: "#FFFFFF",
+  icon: { marginRight: 15 },
+  iconGrid: { marginBottom: 5 },
+  optionText: { fontSize: 18, flexShrink: 1 },
+  optionTextGrid: { fontSize: 14, textAlign: "center" },
+  optionTextUnselected: { color: "black" },
+  optionTextSelected: { color: "#FFFFFF" },
+  optionTextGridUnselected: { color: "black" },
+  optionTextGridSelected: { color: "#FFFFFF" },
+  optionImage: {
+    width: "100%",
+    height: itemWidth,
+    borderTopRightRadius: 12,
+    borderTopLeftRadius: 12,
+    marginBottom: 5,
+    backgroundColor: "#252849",
   },
 });
 

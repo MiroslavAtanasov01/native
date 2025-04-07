@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   Pressable,
   ScrollView,
+  Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import GradientButton from "@/components/GradientButton";
@@ -28,7 +29,8 @@ const QuestionScreen = () => {
     // Simulate API call delay
     setTimeout(() => {
       if (index >= 0 && index < SAMPLE_QUESTIONS.length) {
-        setCurrentQuestion(SAMPLE_QUESTIONS[index]);
+        setCurrentQuestion(SAMPLE_QUESTIONS[1]);
+        // setCurrentQuestion(SAMPLE_QUESTIONS[index]);
       } else {
         // Handle case where there are no more questions or index is invalid
         setCurrentQuestion(null); // Or show a completion message
@@ -47,9 +49,9 @@ const QuestionScreen = () => {
   const handleSelectAnswer = (optionId: string) => {
     setSelectedAnswerId(optionId);
     // Here you would typically record the answer
-    console.log(
-      `Selected answer for Q${currentQuestion?.questionId}: ${optionId}`
-    );
+    // console.log(
+    //   `Selected answer for Q${currentQuestion?.questionId}: ${optionId}`
+    // );
 
     // Automatically load next question after a short delay
     // setTimeout(() => {
@@ -86,6 +88,8 @@ const QuestionScreen = () => {
     );
   }
 
+  const useGrid = currentQuestion.hasImageOptions === true;
+
   return (
     <ScrollView
       style={styles.screen}
@@ -119,36 +123,94 @@ const QuestionScreen = () => {
         <Text style={styles.questionText}>{currentQuestion.questionText}</Text>
 
         {/* Answer Options */}
-        <View style={styles.optionsContainer}>
+        <View
+          style={[
+            styles.optionsContainer,
+            useGrid && styles.optionsContainerGrid,
+          ]}
+        >
           {currentQuestion.options.map((option) => {
             const isSelected = selectedAnswerId === option.id;
+            const hasImage = !!(option.imageUrl || option.localImageSource);
+
+            const buttonStyle = useGrid
+              ? styles.optionButtonGrid
+              : styles.optionButton;
+            const textStyle = useGrid
+              ? styles.optionTextGrid
+              : styles.optionText;
+            const textSelectedStyle = useGrid
+              ? styles.optionTextGridSelected
+              : styles.optionTextSelected;
+            const textUnselectedStyle = useGrid
+              ? styles.optionTextGridUnselected
+              : styles.optionTextUnselected;
+            const iconStyle = useGrid ? styles.iconGrid : styles.icon;
+
+            const imageSource = option.localImageSource
+              ? option.localImageSource
+              : option.imageUrl
+              ? { uri: option.imageUrl }
+              : null;
+
             return (
               <Pressable
                 key={option.id}
                 style={[
-                  styles.optionButton,
+                  buttonStyle,
                   isSelected ? styles.optionSelected : styles.optionUnselected,
                 ]}
                 onPress={() => handleSelectAnswer(option.id)}
-                accessibilityRole="radio" // Accessibility hint
+                accessibilityRole="radio"
                 accessibilityState={{ checked: isSelected }}
               >
-                <MaterialCommunityIcons
-                  name={isSelected ? "check-circle" : "circle-outline"}
-                  size={36}
-                  color={isSelected ? "#FFFFFF" : Colors.secondary}
-                  style={styles.icon}
-                />
-                <Text
-                  style={[
-                    styles.optionText,
-                    isSelected
-                      ? styles.optionTextSelected
-                      : styles.optionTextUnselected,
-                  ]}
-                >
-                  {option.text}
-                </Text>
+                {/* === Conditional Rendering for Image Options === */}
+                {useGrid && imageSource && (
+                  <>
+                    <Image
+                      source={imageSource}
+                      style={styles.optionImage}
+                      resizeMode="contain"
+                      onError={(e) =>
+                        console.log(
+                          "Failed to load option image:",
+                          e.nativeEvent.error
+                        )
+                      }
+                    />
+                  </>
+                )}
+
+                {!useGrid && (
+                  <MaterialCommunityIcons
+                    name={isSelected ? "check-circle" : "circle-outline"}
+                    size={36}
+                    color={isSelected ? "#FFFFFF" : Colors.secondary}
+                    style={iconStyle}
+                  />
+                )}
+
+                {/* === Render Text === */}
+                {/* {option.text && (
+                  <Text
+                    style={[
+                      textStyle,
+                      isSelected ? textSelectedStyle : textUnselectedStyle,
+                    ]}
+                  >
+                    {option.text}
+                  </Text>
+                )} */}
+
+                {/* In Grid: Render icon below text if text exists, or below image if no text */}
+                {useGrid && (
+                  <MaterialCommunityIcons
+                    name={isSelected ? "check-circle" : "circle-outline"}
+                    size={36}
+                    color={isSelected ? "#FFFFFF" : Colors.secondary}
+                    style={iconStyle}
+                  />
+                )}
               </Pressable>
             );
           })}
