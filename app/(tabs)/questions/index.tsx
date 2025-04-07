@@ -4,7 +4,6 @@ import GradientButton from "@/components/GradientButton";
 import styles from "@/styles/questions";
 import QuestionsButton from "@/components/questionsButton/QuestionsButton";
 import { router } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
 import useCamera from "@/hooks/useCamera";
 
 const questions = () => {
@@ -18,30 +17,30 @@ const questions = () => {
         <QuestionsButton
           title="ВЪПРОСИ"
           text="2295/2300"
-          onPress={() => router.navigate("/question")}
+          onPress={() => router.navigate("/questions/question")}
           style={styles.subTItle1}
-          icon={require("../../assets/images/speaker.png")}
+          icon={require("../../../assets/images/speaker.png")}
         />
         <QuestionsButton
           title="МНЕНИЯ"
           text="53 споделени"
           onPress={() => router.navigate("/opinions")}
           style={styles.subTItle2}
-          icon={require("../../assets/images/lamp.png")}
+          icon={require("../../../assets/images/lamp.png")}
         />
         <QuestionsButton
           title="БЛАГОДАРНОСТ"
           text="62% натрупана"
           onPress={() => router.navigate("/gifts")}
           style={styles.subTItle3}
-          icon={require("../../assets/images/box.png")}
+          icon={require("../../../assets/images/box.png")}
         />
         <QuestionsButton
           title="ГРАЖДАНСКИ"
           text="КОНТРОЛ"
           onPress={openCamera}
           style={styles.subTItle4}
-          icon={require("../../assets/images/glass.png")}
+          icon={require("../../../assets/images/glass.png")}
         />
       </View>
       <GradientButton
