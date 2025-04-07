@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import React from "react";
 import styles from "./styles";
-import { Colors } from "@/constants/Colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface QuestionsButtonProps {
   title: string;
@@ -28,17 +28,31 @@ const QuestionsButton: React.FC<QuestionsButtonProps> = ({
   icon,
 }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
       <View style={styles.content}>
-        <Image style={styles.icon} source={icon} />
-        <View>
+        <Image style={styles.icon} source={icon} resizeMode="contain" />
+        <View style={styles.textContainer}>
           <Text style={styles.text}>{title}</Text>
           <Text style={style}>{text}</Text>
         </View>
       </View>
-      <View style={{ backgroundColor: Colors.primary, paddingVertical: 10 }}>
-        <Image source={require("../../assets/images/right-arrow.png")} />
-      </View>
+
+      <LinearGradient
+        colors={["#25509A", "#74ACDA", "#25509A"]}
+        start={{ x: 0, y: 0.5 }}
+        end={{ x: 1, y: 0.5 }}
+      >
+        <View style={styles.arrowContainer}>
+          <Image
+            style={styles.arrowIcon}
+            source={require("../../assets/images/right-arrow.png")}
+          />
+        </View>
+      </LinearGradient>
     </TouchableOpacity>
   );
 };

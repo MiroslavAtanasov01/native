@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { Image, Text } from "react-native";
 import QuestionIcon from "../../assets/images/questions.png";
 import OpinionIcon from "../../assets/images/opinions.png";
 import GiftIcon from "../../assets/images/gifts.png";
@@ -16,8 +16,8 @@ const _layout = () => {
           backgroundColor: "#74ACDA",
           borderTopRightRadius: 50,
           borderTopLeftRadius: 50,
-          height: 80,
-          paddingTop: 20,
+          height: 75,
+          paddingTop: 10,
         },
         tapBarItemStyle: {
           width: "100%",

@@ -4,26 +4,42 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 10,
+    alignItems: "stretch",
     marginHorizontal: 15,
     marginVertical: 10,
     backgroundColor: Colors.gray,
     borderRadius: 20,
-    paddingVertical: 5,
-    paddingRight: 5,
+    overflow: "hidden",
   },
   content: {
+    flex: 1,
     flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingLeft: 15,
   },
   icon: {
     width: 50,
     height: 50,
-    marginHorizontal: 20,
+    marginRight: 15,
+  },
+  textContainer: {
+    flexShrink: 1,
   },
   text: {
-    fontSize: 23,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  arrowContainer: {
+    width: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 20,
+  },
+  arrowIcon: {
+    width: 16,
+    height: 27,
+    resizeMode: "contain",
   },
 });
 
