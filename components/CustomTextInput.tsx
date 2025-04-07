@@ -16,6 +16,9 @@ interface CustomTextInputProps {
   mode?: InputModeOptions;
   onChangeText?: (text: string) => void;
   style?: StyleProp<TextStyle>;
+  counter?: Boolean;
+  maxSymbols?: number;
+  numSymbols?: number;
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -24,13 +27,51 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   mode,
   onChangeText,
   style,
+  counter,
+  numSymbols,
+  maxSymbols,
 }) => {
   return (
     <View>
-      <Text style={styles.label}>{label}</Text>
+      {counter ? (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginHorizontal: 10,
+          }}
+        >
+          <Text
+            style={[
+              styles.label,
+              { flex: 1, textAlign: "center", paddingLeft: 70 },
+            ]}
+          >
+            {label}
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 12,
+              color: "#25509A",
+              width: 70,
+              textAlign: "right",
+              paddingRight: 15,
+            }}
+          >
+            {numSymbols} / {maxSymbols}
+          </Text>
+        </View>
+      ) : (
+        <View>
+          <Text style={styles.label}>{label}</Text>
+        </View>
+      )}
       <TextInput
         multiline
-        numberOfLines={4}
+        numberOfLines={8}
+        maxLength={maxSymbols}
         inputMode={mode}
         style={[styles.input, style]}
         value={value}

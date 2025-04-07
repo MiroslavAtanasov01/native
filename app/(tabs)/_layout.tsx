@@ -35,6 +35,7 @@ const _layout = () => {
         name="questions"
         options={{
           title: "ВЪПРОСИ",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
               source={QuestionIcon}
@@ -63,6 +64,7 @@ const _layout = () => {
         name="gifts"
         options={{
           title: "ПОДАРЪЦИ",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
               source={GiftIcon}
