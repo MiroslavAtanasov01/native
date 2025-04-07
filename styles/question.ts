@@ -27,8 +27,16 @@ const styles = StyleSheet.create({
     color: "#555",
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 10,
     alignItems: "center",
+  },
+  headerWrapper: {
+    margin: "auto",
+    width: "60%",
+  },
+  headerTextWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   headerText: {
     fontSize: 14,
@@ -73,23 +81,6 @@ const styles = StyleSheet.create({
   },
   optionTextSelected: {
     color: "#FFFFFF",
-  },
-  nextButton: {
-    marginTop: 30,
-    backgroundColor: "#1E88E5", // Example color for next button
-    paddingVertical: 15,
-    borderRadius: 25,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  nextButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
   },
 });
 

@@ -93,18 +93,26 @@ const QuestionScreen = () => {
     >
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-            <Text style={styles.headerText}>Кампания №</Text>
-            <Text style={styles.headerTextBlack}>
-              {currentQuestion.campaignId}
-            </Text>
+          <View style={styles.headerWrapper}>
+            <View style={styles.headerTextWrapper}>
+              <Text style={styles.headerText}>Кампания №</Text>
+              <Text style={styles.headerTextBlack}>
+                {currentQuestion.campaignId}
+              </Text>
+            </View>
+            <View style={styles.headerTextWrapper}>
+              <Text style={styles.headerText}>Тема №</Text>
+              <Text style={styles.headerTextBlack}>
+                {currentQuestion.themeId}
+              </Text>
+            </View>
+            <View style={styles.headerTextWrapper}>
+              <Text style={styles.headerText}>Въпрос №</Text>
+              <Text style={styles.headerTextBlack}>
+                {currentQuestion.questionId}
+              </Text>
+            </View>
           </View>
-          <Text style={styles.headerText}>
-            Тема № {currentQuestion.themeId}
-          </Text>
-          <Text style={styles.headerText}>
-            Въпрос № {currentQuestion.questionId}
-          </Text>
         </View>
 
         {/* Question Text */}

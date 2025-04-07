@@ -35,6 +35,7 @@ const _layout = () => {
         name="questions"
         options={{
           title: "ВЪПРОСИ",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
               source={QuestionIcon}
