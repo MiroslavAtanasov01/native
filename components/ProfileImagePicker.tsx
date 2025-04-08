@@ -1,6 +1,6 @@
 import { View, Image, TouchableOpacity, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import styles from "../styles/register";
+import styles from "@/styles/register";
 import React from "react";
 import { todayDate } from "@/utils/text";
 

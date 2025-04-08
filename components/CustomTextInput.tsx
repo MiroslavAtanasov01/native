@@ -6,7 +6,7 @@ import {
   StyleProp,
   TextStyle,
 } from "react-native";
-import styles from "../styles/register";
+import styles from "@/styles/register";
 import React from "react";
 
 //TODO remove ? after opinions is filled with props

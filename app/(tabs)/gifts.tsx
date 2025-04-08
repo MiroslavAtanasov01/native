@@ -5,7 +5,7 @@ import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import Heart from "../../assets/images/heart.svg";
 import GiftGoup from "../../assets/images/gift-group.svg";
 import OrangeMark from "../../assets/images/orange-mark.svg";
-import styles from "../styles/gifts";
+import styles from "@/styles/gifts";
 
 const Gifts = () => {
   return (
