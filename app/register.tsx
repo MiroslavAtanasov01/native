@@ -2,7 +2,7 @@ import { Text, View, Pressable, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
-import styles from "./styles/register";
+import styles from "../styles/register";
 import { ProfileInfo } from "@/types/types";
 import ProfileImagePicker from "@/components/ProfileImagePicker";
 import CustomPicker from "@/components/CustomPicker";
@@ -15,6 +15,7 @@ import {
 import CustomTextInput from "@/components/CustomTextInput";
 import SelectableButtonGroup from "@/components/SelectableButtonGroup";
 import { Image } from "react-native";
+import { Colors } from "@/constants/Colors";
 
 const register = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -84,7 +85,7 @@ const register = () => {
         {/* First view */}
         {!showSecondView && (
           <>
-            <View style={{ backgroundColor: "#D7D8D9", paddingVertical: 5 }}>
+            <View style={{ backgroundColor: Colors.gray, paddingVertical: 5 }}>
               <View style={styles.inputContainer}>
                 <View style={styles.inputSide}>
                   <CustomTextInput
@@ -194,7 +195,7 @@ const register = () => {
         {/* Second view (conditionally rendered) */}
         {showSecondView && (
           <>
-            <View style={{ backgroundColor: "#D7D8D9", paddingVertical: 5 }}>
+            <View style={{ backgroundColor: Colors.gray, paddingVertical: 5 }}>
               <View style={styles.inputContainer}>
                 <View style={styles.inputSide}>
                   <Text style={styles.label}>ДЪРЖАВА</Text>

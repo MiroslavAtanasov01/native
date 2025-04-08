@@ -1,10 +1,11 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { Image, Text } from "react-native";
 import QuestionIcon from "../../assets/images/questions.png";
 import OpinionIcon from "../../assets/images/opinions.png";
 import GiftIcon from "../../assets/images/gifts.png";
-import ProfileIcon from "../../assets/images/profile.png";
+import ProfileIcon from "../../assets/images/svg/profile.svg";
+import ProfileWhiteIcon from "../../assets/images/svg/profile_white.svg";
 import Logo from "@/components/Logo";
 
 const _layout = () => {
@@ -16,8 +17,8 @@ const _layout = () => {
           backgroundColor: "#74ACDA",
           borderTopRightRadius: 50,
           borderTopLeftRadius: 50,
-          height: 80,
-          paddingTop: 20,
+          height: 75,
+          paddingTop: 10,
         },
         tapBarItemStyle: {
           width: "100%",
@@ -79,13 +80,12 @@ const _layout = () => {
         options={{
           title: "ПРОФИЛ",
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={ProfileIcon}
-              tintColor={focused ? "white" : "#252849"}
-              style={{ width: 37, height: 42 }}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <ProfileWhiteIcon width={37} height={42} />
+            ) : (
+              <ProfileIcon width={37} height={42} />
+            ),
         }}
       />
     </Tabs>

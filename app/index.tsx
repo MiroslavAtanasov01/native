@@ -55,7 +55,7 @@ const index = () => {
       </Text>
       <GradientButton
         title="РЕГИСТРИРАЙ СЕ"
-        onPress={() => router.navigate("/preregister")}
+        onPress={() => router.navigate("/questions")} // preregister
         style={{ marginTop: 15, width: "60%", margin: "auto" }}
       />
     </View>
