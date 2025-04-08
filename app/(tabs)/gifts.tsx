@@ -1,14 +1,15 @@
 import React from "react";
 import Header from "@/components/Header";
 import { router } from "expo-router";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import Heart from "../../assets/images/heart.svg";
 import GiftGoup from "../../assets/images/gift-group.svg";
 import OrangeMark from "../../assets/images/orange-mark.svg";
+import styles from "../styles/gifts";
 
 const Gifts = () => {
   return (
-    <View>
+    <ScrollView>
       <Header title="БЛАГОДАРНОСТ" subtitle="ИЗБЕРЕТЕ" />
       <View style={styles.imageContainer}>
         <OrangeMark />
@@ -29,51 +30,10 @@ const Gifts = () => {
       </View>
       {/* TODO Change path */}
       <TouchableOpacity onPress={() => router.navigate("/(tabs)/opinions")}>
-        <Text style={styles.linkText}>Виж подаръци</Text>
+        <Text style={styles.linkText}>Всички категории</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
 export default Gifts;
-
-const styles = StyleSheet.create({
-  imageContainer: {
-    alignItems: "center",
-    paddingVertical: 5,
-  },
-  orangeText: {
-    color: "#E47E1A",
-    fontSize: 16,
-    textAlign: "center",
-    lineHeight: 25,
-    paddingHorizontal: 35,
-    paddingVertical: 5,
-  },
-  redText: {
-    color: "#E30613",
-    fontSize: 20,
-    textAlign: "center",
-    lineHeight: 25,
-    paddingHorizontal: 45,
-    paddingVertical: 5,
-    fontWeight: "500",
-  },
-  giftText: {
-    color: "#25509A",
-    textAlign: "center",
-    fontSize: 25,
-    fontWeight: "400",
-    paddingVertical: 5,
-  },
-  imgWrapper: {
-    backgroundColor: "#D7D8D9",
-    paddingHorizontal: 10,
-  },
-  linkText: {
-    textAlign: "center",
-    padding: 10,
-    color: "#74ACDA",
-    textDecorationLine: "underline",
-  },
-});

@@ -45,7 +45,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
           <Text
             style={[
               styles.label,
-              { flex: 1, textAlign: "center", paddingLeft: 70 },
+              { flex: 1, textAlign: "center", paddingLeft: 90 },
             ]}
           >
             {label}
@@ -53,9 +53,9 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
 
           <Text
             style={{
-              fontSize: 12,
+              fontSize: 17,
               color: "#25509A",
-              width: 70,
+              width: 90,
               textAlign: "right",
               paddingRight: 15,
             }}
