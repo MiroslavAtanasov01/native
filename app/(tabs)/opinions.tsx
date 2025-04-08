@@ -22,7 +22,7 @@ const Opinions = () => {
       {/* TODO Hide navbar while typing */}
       <View
         style={{
-          backgroundColor: Colors.answerbg,
+          backgroundColor: Colors.gray,
           paddingVertical: 5,
           marginBottom: 10,
         }}
@@ -64,7 +64,7 @@ const Opinions = () => {
 
       <GradientButton
         title="ИЗПРАТИ СВОЕТО МНЕНИЕ"
-        style={{ marginTop: 10, marginHorizontal: 35 }}
+        style={{ marginTop: 10, marginHorizontal: 25 }}
       />
     </ScrollView>
   );

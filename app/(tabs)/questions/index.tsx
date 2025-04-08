@@ -5,6 +5,8 @@ import styles from "@/styles/questions";
 import QuestionsButton from "@/components/questionsButton/QuestionsButton";
 import { router } from "expo-router";
 import useCamera from "@/hooks/useCamera";
+import Header from "@/components/Header";
+import Logo from "@/components/Logo";
 
 const questions = () => {
   const [picture, setPicture] = useState<string | null>(null);
@@ -12,6 +14,8 @@ const questions = () => {
 
   return (
     <View>
+      <Header title="МЕРОПРИЯТИЯ" subtitle="ПО ПРОГРАМА" />
+      <Logo />
       <Text style={styles.title}>Отговаряйте и трупайте лоялност!</Text>
       <View>
         <QuestionsButton

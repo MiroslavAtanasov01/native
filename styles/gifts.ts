@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   imageContainer: {
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: 10,
   },
   orangeText: {
     color: Colors.info,
@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 25,
     paddingHorizontal: 35,
-    paddingVertical: 5,
   },
   redText: {
     color: Colors.warning,
@@ -20,7 +19,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 25,
     paddingHorizontal: 45,
-    paddingVertical: 5,
     fontWeight: "500",
   },
   giftText: {
