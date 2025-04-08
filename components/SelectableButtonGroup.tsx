@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from "react-native";
-import styles from "../app/styles/register";
+import styles from "../styles/register";
 import React from "react";
 
 interface SelectableButtonGroupProps {

@@ -4,15 +4,23 @@ import {
   Text,
   StyleSheet,
   GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
+  Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface GradientButtonProps {
   title: string;
   onPress?: (event: GestureResponderEvent) => void;
+  style?: StyleProp<ViewStyle>;
 }
 
-const GradientButton: React.FC<GradientButtonProps> = ({ title, onPress }) => {
+const GradientButton: React.FC<GradientButtonProps> = ({
+  title,
+  onPress,
+  style,
+}) => {
   const [isPressed, setIsPressed] = useState(false);
 
   return (
@@ -21,7 +29,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({ title, onPress }) => {
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       onPress={onPress}
-      style={styles.button}
+      style={style}
     >
       <LinearGradient
         colors={
@@ -43,32 +51,37 @@ const GradientButton: React.FC<GradientButtonProps> = ({ title, onPress }) => {
   );
 };
 
-export default GradientButton;
-
 const styles = StyleSheet.create({
-  button: {
+  gradient: {
     paddingVertical: 15,
-    paddingHorizontal: 30,
-    width: "90%",
-    margin: "auto",
-  },
-  buttonPressed: {
-    transform: [{ scale: 0.95 }],
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
   },
   text: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    textAlign: "center",
   },
-  gradient: {
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
+  buttonPressed: {
+    transform: [{ scale: 0.98 }],
   },
   shadow: {
-    boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.7)",
-    elevation: 6,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.4,
+        shadowRadius: 3,
+      },
+      android: {
+        boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.7)",
+      },
+    }),
   },
 });
+
+export default GradientButton;
