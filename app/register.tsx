@@ -2,7 +2,7 @@ import { Text, View, Pressable, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
-import styles from "../styles/register";
+import styles from "@/styles/register";
 import { ProfileInfo } from "@/types/types";
 import ProfileImagePicker from "@/components/ProfileImagePicker";
 import CustomPicker from "@/components/CustomPicker";

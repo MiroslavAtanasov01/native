@@ -50,6 +50,7 @@ const _layout = () => {
         name="opinions"
         options={{
           title: "МНЕНИЯ",
+          headerShown: false,
           headerTitleStyle: { color: "white" },
           tabBarIcon: ({ focused }) => (
             <Image
@@ -64,6 +65,7 @@ const _layout = () => {
         name="gifts"
         options={{
           title: "ПОДАРЪЦИ",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
               source={GiftIcon}
