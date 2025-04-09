@@ -10,7 +10,7 @@ const Opinions = () => {
   const [topicText, setTopicText] = useState("");
 
   return (
-    <ScrollView>
+    <ScrollView alwaysBounceVertical={false}>
       <Header title="НОВО" subtitle="МНЕНИЕ" />
 
       <Image

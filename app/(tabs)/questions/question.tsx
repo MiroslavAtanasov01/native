@@ -97,6 +97,7 @@ const QuestionScreen = () => {
       <ScrollView
         style={styles.screen}
         contentContainerStyle={styles.scrollContainer}
+        alwaysBounceVertical={false}
       >
         <View style={styles.container}>
           <View style={styles.header}>
@@ -259,7 +260,7 @@ const QuestionScreen = () => {
           </View>
           <GradientButton
             title="ИЗПРАТИ СВОЯТ ОТГОВОР"
-            onPress={() => router.navigate("/questions")}
+            onPress={() => router.navigate("/reply")}
             style={styles.button}
           />
         </View>

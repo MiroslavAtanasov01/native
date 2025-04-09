@@ -40,14 +40,12 @@ const Answer: React.FC<GradientButtonProps> = ({
       <TouchableOpacity onPress={handlePress} style={styles.touchable}>
         <View style={styles.content}>
           <Image
+            style={styles.iconQuestionMark}
             source={icons["questionMark"]}
             resizeMode="contain"
-            style={{ width: 38, height: 38 }}
           />
           <Text style={styles.text}>{title}</Text>
-          {icon && (
-            <Image source={icons[icon]} style={{ width: 20, height: 18 }} />
-          )}
+          {icon && <Image source={icons[icon]} style={styles.iconHeart} />}
         </View>
       </TouchableOpacity>
 

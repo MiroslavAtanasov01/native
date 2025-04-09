@@ -114,19 +114,14 @@ const Profile = () => {
           </View>
         </View>
         <View style={styles.buttonRow}>
-          {/* Button 1: Exit */}
           <GradientButton
             title="ИЗХОД"
             onPress={() => BackHandler.exitApp()}
-            // Apply flex and margin via the style prop
             style={styles.buttonStyle}
           />
-
-          {/* Button 2: Continue */}
           <GradientButton
             title="ПРОДЪЛЖИ"
-            onPress={() => router.navigate("/questions")} // Adjust route as needed
-            // Apply flex and margin via the style prop
+            onPress={() => router.navigate("/questions")}
             style={styles.buttonStyle}
           />
         </View>

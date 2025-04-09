@@ -5,8 +5,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
-    gap: 10,
     paddingVertical: 15,
     paddingHorizontal: 25,
     backgroundColor: Colors.gray,
@@ -15,24 +13,39 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   touchable: {
-    width: "100%",
+    flex: 1,
   },
   content: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+    width: "100%",
   },
   text: {
     color: "#25509A",
-    fontSize: 20,
+    fontSize: 18,
+    flex: 1,
+    flexShrink: 1,
+  },
+  iconQuestionMark: {
+    width: 38,
+    height: 38,
+    resizeMode: "contain",
+  },
+  iconHeart: {
+    width: 20,
+    height: 18,
+    resizeMode: "contain",
   },
   modalBackground: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "rgba(0,0,0,0.5)", // Add semi-transparent background
   },
   modalContainer: {
-    width: 300,
+    width: "85%",
+    maxWidth: 350,
     padding: 15,
     backgroundColor: "white",
     borderRadius: 10,
@@ -42,12 +55,14 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     color: "#25509A",
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
+    textAlign: "center",
   },
   modalText: {
     fontSize: 15,
+    textAlign: "center",
   },
 });
 

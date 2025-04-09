@@ -74,7 +74,10 @@ const register = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      alwaysBounceVertical={false}
+    >
       <View>
         <ProfileImagePicker
           profileImage={profileImage}

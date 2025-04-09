@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   buttonStyle: {},
 });
