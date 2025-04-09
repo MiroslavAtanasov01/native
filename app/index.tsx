@@ -5,6 +5,8 @@ import { useRouter } from "expo-router";
 import Logo from "@/components/Logo";
 import { FlatList } from "react-native";
 
+import Check from "@/assets/images/check.svg";
+
 const index = () => {
   const router = useRouter();
 
@@ -40,10 +42,7 @@ const index = () => {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <View style={styles.listItem}>
-                <Image
-                  source={require("../assets/images/check.png")}
-                  resizeMode="contain"
-                />
+                <Check />
                 <Text className="text-white text-base ml-5">{item}</Text>
               </View>
             )}
@@ -55,7 +54,7 @@ const index = () => {
       </Text>
       <GradientButton
         title="РЕГИСТРИРАЙ СЕ"
-        onPress={() => router.navigate("/questions")} // preregister
+        onPress={() => router.navigate("/preregister")} // preregister
         style={{ marginTop: 15, width: "60%", margin: "auto" }}
       />
     </View>

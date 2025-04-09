@@ -3,13 +3,13 @@ import Header from "@/components/Header";
 import { router } from "expo-router";
 import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import Heart from "../../assets/images/heart.svg";
-import GiftGoup from "../../assets/images/gift-group.svg";
 import OrangeMark from "../../assets/images/orange-mark.svg";
+import GiftGoup from "../../assets/images/gift-group.svg";
 import styles from "@/styles/gifts";
 
 const Gifts = () => {
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#ffffff" }}>
       <Header title="БЛАГОДАРНОСТ" subtitle="ИЗБЕРЕТЕ" />
       <View style={styles.imageContainer}>
         <OrangeMark />

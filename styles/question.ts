@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    padding: 20, // TODO
+    //TODO
+    // padding: 20, 
   },
   centered: {
     flex: 1,

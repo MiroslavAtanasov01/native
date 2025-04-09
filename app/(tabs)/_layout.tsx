@@ -1,9 +1,14 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { Image, Text } from "react-native";
-import QuestionIcon from "../../assets/images/questions.png";
-import OpinionIcon from "../../assets/images/opinions.png";
-import GiftIcon from "../../assets/images/gifts.png";
+import { Text } from "react-native";
+
+import GiftBlackIcon from "../../assets/images/gifts.svg";
+import GiftWhiteIcon from "../../assets/images/gift-white.svg";
+import SpeakersBlackIcon from "../../assets/images/questions.svg";
+import SpeakersWhiteIcon from "../../assets/images/questions-white.svg";
+import OpinionsBlackIcon from "../../assets/images/opinions.svg";
+import OpinionsWhiteIcon from "../../assets/images/opinions-white.svg";
+
 import ProfileIcon from "../../assets/images/svg/profile.svg";
 import ProfileWhiteIcon from "../../assets/images/svg/profile_white.svg";
 import Logo from "@/components/Logo";
@@ -12,6 +17,9 @@ const _layout = () => {
   return (
     <Tabs
       screenOptions={({ route }) => ({
+        contentStyle: {
+          backgroundColor: "#ffffff",
+        },
         header: () => <Logo />,
         tabBarStyle: {
           backgroundColor: "#74ACDA",
@@ -37,13 +45,12 @@ const _layout = () => {
         options={{
           title: "ВЪПРОСИ",
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={QuestionIcon}
-              tintColor={focused ? "white" : "#252849"}
-              style={{ width: 42, height: 42 }}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <SpeakersWhiteIcon width={42} height={42} />
+            ) : (
+              <SpeakersBlackIcon width={42} height={42} />
+            ),
         }}
       />
       <Tabs.Screen
@@ -52,13 +59,12 @@ const _layout = () => {
           title: "МНЕНИЯ",
           headerShown: false,
           headerTitleStyle: { color: "white" },
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={OpinionIcon}
-              tintColor={focused ? "white" : "#252849"}
-              style={{ width: 27, height: 42 }}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <OpinionsWhiteIcon width={27} height={42} />
+            ) : (
+              <OpinionsBlackIcon width={27} height={42} />
+            ),
         }}
       />
       <Tabs.Screen
@@ -66,13 +72,12 @@ const _layout = () => {
         options={{
           title: "ПОДАРЪЦИ",
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={GiftIcon}
-              tintColor={focused ? "white" : "#252849"}
-              style={{ width: 45, height: 42 }}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <GiftWhiteIcon width={45} height={42} />
+            ) : (
+              <GiftBlackIcon width={45} height={42} />
+            ),
         }}
       />
       <Tabs.Screen

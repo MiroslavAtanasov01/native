@@ -8,6 +8,11 @@ import useCamera from "@/hooks/useCamera";
 import Header from "@/components/Header";
 import Logo from "@/components/Logo";
 
+import Box from "@/assets/images/box.svg";
+import Lamp from "@/assets/images/lamp.svg";
+import Speaker from "@/assets/images/speaker.svg";
+import Glass from "@/assets/images/glass.svg";
+
 const questions = () => {
   const [picture, setPicture] = useState<string | null>(null);
   const { openCamera } = useCamera(setPicture);
@@ -23,28 +28,28 @@ const questions = () => {
           text="2295/2300"
           onPress={() => router.navigate("/questions/question")}
           style={styles.subTItle1}
-          icon={require("../../../assets/images/speaker.png")}
+          icon={<Speaker height={45} width={45} />}
         />
         <QuestionsButton
           title="МНЕНИЯ"
           text="53 споделени"
           onPress={() => router.navigate("/opinions")}
           style={styles.subTItle2}
-          icon={require("../../../assets/images/lamp.png")}
+          icon={<Lamp height={45} width={45} />}
         />
         <QuestionsButton
           title="БЛАГОДАРНОСТ"
           text="62% натрупана"
           onPress={() => router.navigate("/gifts")}
           style={styles.subTItle3}
-          icon={require("../../../assets/images/box.png")}
+          icon={<Box height={45} width={45} />}
         />
         <QuestionsButton
           title="ГРАЖДАНСКИ"
           text="КОНТРОЛ"
           onPress={openCamera}
           style={styles.subTItle4}
-          icon={require("../../../assets/images/glass.png")}
+          icon={<Glass height={45} width={45} />}
         />
       </View>
       <GradientButton

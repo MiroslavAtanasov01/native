@@ -10,9 +10,16 @@ import {
 import styles from "./styles";
 import { IconType } from "@/types/types";
 
-const icons: Record<IconType, any> = {
-  heart: require("../../assets/images/heart.png"),
-  questionMark: require("../../assets/images/question-mark.png"),
+// Images
+import Heart from "../../assets/images/heart.svg";
+import QuestionMark from "../../assets/images/question-mark.svg";
+
+const icons: Record<
+  IconType,
+  React.FC<{ width?: number; height?: number; fill?: string }>
+> = {
+  heart: Heart,
+  questionMark: QuestionMark,
 };
 
 interface GradientButtonProps {
@@ -39,15 +46,9 @@ const Answer: React.FC<GradientButtonProps> = ({
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePress} style={styles.touchable}>
         <View style={styles.content}>
-          <Image
-            source={icons["questionMark"]}
-            resizeMode="contain"
-            style={{ width: 38, height: 38 }}
-          />
+          <QuestionMark width={38} height={38} />
           <Text style={styles.text}>{title}</Text>
-          {icon && (
-            <Image source={icons[icon]} style={{ width: 20, height: 18 }} />
-          )}
+          {icon && React.createElement(icons[icon], { width: 20, height: 18 })}
         </View>
       </TouchableOpacity>
 

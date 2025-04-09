@@ -4,18 +4,20 @@ import Header from "@/components/Header";
 import GradientButton from "@/components/GradientButton";
 import CustomTextInput from "@/components/CustomTextInput";
 import { Colors } from "@/constants/Colors";
+import OpinionsListIcon from "@/assets/images/opinions-list.svg";
 
 const Opinions = () => {
   const [opinionText, setOpinionText] = useState("");
   const [topicText, setTopicText] = useState("");
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#ffffff" }}>
       <Header title="НОВО" subtitle="МНЕНИЕ" />
 
-      <Image
+      <OpinionsListIcon
+        width={70}
+        height={70}
         style={{ alignSelf: "center", margin: 10 }}
-        source={require("../../assets/images/opinions-list.png")}
       />
 
       <Text style={opinionStyles.opinionTitle}>СПОДЕЛЕТЕ СВОЕТО МНЕНИЕ</Text>

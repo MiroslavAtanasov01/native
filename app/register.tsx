@@ -16,6 +16,7 @@ import CustomTextInput from "@/components/CustomTextInput";
 import SelectableButtonGroup from "@/components/SelectableButtonGroup";
 import { Image } from "react-native";
 import { Colors } from "@/constants/Colors";
+import OrangeMark from "@/assets/images/orange-mark.svg";
 
 const register = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -245,10 +246,7 @@ const register = () => {
                 </View>
               </View>
               <View style={styles.textContainer}>
-                <Image
-                  style={{ marginRight: 10 }}
-                  source={require("./../assets/images/orange-mark.png")}
-                />
+                <OrangeMark style={{ padding: 15 }} />
                 <Text style={styles.text}>ВАШИТЕ ДАННИ ЩЕ БЪДАТ СКРИТИ</Text>
               </View>
               <View style={styles.inputContainer}>

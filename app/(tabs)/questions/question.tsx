@@ -93,11 +93,11 @@ const QuestionScreen = () => {
 
   return (
     <>
-      <Header title="ИМАМЕ ВЪПРОСИ" subtitle="3 ВЪПРОСА" />
       <ScrollView
         style={styles.screen}
         contentContainerStyle={styles.scrollContainer}
       >
+        <Header title="ИМАМЕ ВЪПРОСИ" subtitle="3 ВЪПРОСА" />
         <View style={styles.container}>
           <View style={styles.header}>
             <View style={styles.headerWrapper}>

@@ -5,19 +5,19 @@ import {
   TouchableOpacity,
   GestureResponderEvent,
   StyleProp,
-  ImageSourcePropType,
   TextStyle,
 } from "react-native";
-import React from "react";
+import React, { ReactNode } from "react";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
+import ArrowR from "@/assets/images/right-arrow.svg";
 
 interface QuestionsButtonProps {
   title: string;
   text: string;
   onPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<TextStyle>;
-  icon: ImageSourcePropType;
+  icon: ReactNode;
 }
 
 const QuestionsButton: React.FC<QuestionsButtonProps> = ({
@@ -34,7 +34,7 @@ const QuestionsButton: React.FC<QuestionsButtonProps> = ({
       activeOpacity={0.7}
     >
       <View style={styles.content}>
-        <Image style={styles.icon} source={icon} resizeMode="contain" />
+        <View style={styles.icon}>{icon}</View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>{title}</Text>
           <Text style={style}>{text}</Text>
@@ -47,10 +47,7 @@ const QuestionsButton: React.FC<QuestionsButtonProps> = ({
         end={{ x: 1, y: 0.5 }}
       >
         <View style={styles.arrowContainer}>
-          <Image
-            style={styles.arrowIcon}
-            source={require("../../assets/images/right-arrow.png")}
-          />
+          <ArrowR height={28} />
         </View>
       </LinearGradient>
     </TouchableOpacity>
