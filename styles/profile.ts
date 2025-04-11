@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.gray,
     paddingVertical: 15,
     paddingHorizontal: 10,
-    alignItems: "center",
+    paddingLeft: 50,
   },
   contentWrapper: {
     margin: "auto",
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   icon: {
-    width: 20,
-    height: 20,
+    width: 25,
+    height: 25,
     resizeMode: "contain",
     marginRight: 15,
   },
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   buttonStyle: {},
 });

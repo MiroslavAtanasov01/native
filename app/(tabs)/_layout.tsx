@@ -29,7 +29,9 @@ const _layout = () => {
         },
         tabBarShowLabel: true,
         tabBarLabel: ({ focused, children }) =>
-          focused ? <Text className="mt-2 text-white">{children}</Text> : null,
+          focused ? (
+            <Text style={{ color: "white", marginTop: 5 }}>{children}</Text>
+          ) : null,
       })}
     >
       <Tabs.Screen

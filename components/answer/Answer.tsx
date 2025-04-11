@@ -8,31 +8,19 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
-import { IconType } from "@/types/types";
+import { icons } from "@/constants/Text";
 
-const icons: Record<IconType, any> = {
-  heart: require("../../assets/images/heart.png"),
-  questionMark: require("../../assets/images/question-mark.png"),
-};
-
-interface GradientButtonProps {
+interface AnswerButtonProps {
   text: string;
   title: string;
   icon?: keyof typeof icons;
-  onPress?: (event: GestureResponderEvent) => void;
 }
 
-const Answer: React.FC<GradientButtonProps> = ({
-  text,
-  title,
-  icon,
-  onPress,
-}) => {
+const Answer: React.FC<AnswerButtonProps> = ({ text, title, icon }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handlePress = (event: GestureResponderEvent) => {
     setIsModalVisible(true);
-    if (onPress) onPress(event);
   };
 
   return (
@@ -40,14 +28,12 @@ const Answer: React.FC<GradientButtonProps> = ({
       <TouchableOpacity onPress={handlePress} style={styles.touchable}>
         <View style={styles.content}>
           <Image
+            style={styles.iconQuestionMark}
             source={icons["questionMark"]}
             resizeMode="contain"
-            style={{ width: 38, height: 38 }}
           />
           <Text style={styles.text}>{title}</Text>
-          {icon && (
-            <Image source={icons[icon]} style={{ width: 20, height: 18 }} />
-          )}
+          {icon && <Image source={icons[icon]} style={styles.iconHeart} />}
         </View>
       </TouchableOpacity>
 
