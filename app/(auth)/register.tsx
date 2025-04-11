@@ -1,4 +1,4 @@
-import { Text, View, Pressable, ScrollView } from "react-native";
+import { Text, View, Pressable, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
@@ -16,12 +16,14 @@ import CustomTextInput from "@/components/CustomTextInput";
 import SelectableButtonGroup from "@/components/SelectableButtonGroup";
 import { Image } from "react-native";
 import { Colors } from "@/constants/Colors";
+import { useAuth } from "@/context/AuthContext";
 
-const register = () => {
+const RegisterScreen = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [selectedRange, setSelectedRange] = useState<string | null>(null);
   const [selectedIncome, setSelectedIncome] = useState<string | null>(null);
   const [showSecondView, setShowSecondView] = useState(false);
+  const { signIn } = useAuth();
 
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
     name: "",
@@ -49,7 +51,8 @@ const register = () => {
       // profileInfo.profession &&
       // profileInfo.interests &&
       // selectedRange &&
-      selectedIncome
+      // selectedIncome
+      profileInfo.name
     ) {
       setShowSecondView(true);
     } else {
@@ -57,20 +60,42 @@ const register = () => {
     }
   };
 
-  const register = () => {
+  const handleRegister = async () => {
     if (
-      // profileInfo.country &&
-      // profileInfo.city &&
-      // profileInfo.district &&
-      // profileInfo.neighborhood &&
-      // profileInfo.street &&
-      // profileInfo.streetNumber &&
-      profileInfo.email
+      !profileInfo.name ||
+      !profileInfo.lastName ||
+      // !profileInfo.gender ||
+      // !profileInfo.profession ||
+      // !profileInfo.interests ||
+      // !selectedRange ||
+      // !profileInfo.country ||
+      // !profileInfo.city ||
+      // !profileInfo.district ||
+      // !profileInfo.neighborhood ||
+      // !profileInfo.street ||
+      // !profileInfo.streetNumber ||
+      !profileInfo.email
     ) {
-      router.navigate("/profile");
-    } else {
-      console.log("error");
+      Alert.alert("Грешка", "Моля, попълнете всички полета.");
+      return;
     }
+
+    // Simulate successful registration:
+    // 1. Generate a mock token/flag
+    const mockToken = `loggedInUser_${Date.now()}`; // Simple mock token
+
+    // 2. Call the signIn function from context to update state and save token
+    await signIn(mockToken);
+
+    // 3. Navigation:
+    // Option A: Let the root layout handle the redirect (Recommended)
+    // The useProtectedRoute hook in _layout.js will detect the change
+    // in auth.isAuthenticated and automatically redirect to '(tabs)'.
+    router.navigate("/profile");
+    console.log("Registration successful, relying on root layout redirect.");
+
+    // Option B: Explicit navigation (Less common with this pattern, but possible)
+    // router.replace('/(tabs)'); // Replace ensures user can't go back to register screen
   };
 
   return (
@@ -250,7 +275,7 @@ const register = () => {
               <View style={styles.textContainer}>
                 <Image
                   style={{ marginRight: 10 }}
-                  source={require("./../assets/images/orange-mark.png")}
+                  source={require("@/assets/images/orange-mark.png")}
                 />
                 <Text style={styles.text}>ВАШИТЕ ДАННИ ЩЕ БЪДАТ СКРИТИ</Text>
               </View>
@@ -290,7 +315,7 @@ const register = () => {
 
             <GradientButton
               title="РЕГИСТРАЦИЯ"
-              onPress={register}
+              onPress={handleRegister}
               style={styles.gradientButton}
             />
           </>
@@ -300,4 +325,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default RegisterScreen;

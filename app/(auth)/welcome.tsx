@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import React from "react";
 import GradientButton from "@/components/GradientButton";
 import { useRouter } from "expo-router";
@@ -18,7 +18,7 @@ const IndexScreen = () => {
   ];
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Logo />
 
       <View style={styles.middleContent}>
@@ -65,7 +65,7 @@ const IndexScreen = () => {
         onPress={() => router.navigate("/login")}
         style={styles.registerButton}
       />
-    </ScrollView>
+    </View>
   );
 };
 

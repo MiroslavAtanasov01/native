@@ -23,6 +23,7 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
         selectedValue={selectedValue}
         onValueChange={onValueChange}
       >
+        {selectedValue === "" && <Picker.Item label="" value="" />}
         {options.map((option) => (
           <Picker.Item
             key={option.value}

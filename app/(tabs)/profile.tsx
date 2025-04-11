@@ -5,8 +5,10 @@ import styles from "@/styles/profile";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
 import Header from "@/components/Header";
+import { useAuth } from "@/context/AuthContext";
 
 const Profile = () => {
+  const { signOut } = useAuth();
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
     name: "Иван",
     lastName: "Иванов",
@@ -24,6 +26,10 @@ const Profile = () => {
     street: "",
     streetNumber: "",
   });
+
+  const handleLogout = async () => {
+    await signOut();
+  };
 
   const profileImageSource = profileInfo.image
     ? { uri: profileInfo.image }
@@ -116,7 +122,7 @@ const Profile = () => {
         <View style={styles.buttonRow}>
           <GradientButton
             title="ИЗХОД"
-            onPress={() => BackHandler.exitApp()}
+            onPress={handleLogout}
             style={styles.buttonStyle}
           />
           <GradientButton

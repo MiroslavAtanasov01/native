@@ -90,7 +90,7 @@ const QuestionScreen = () => {
         </Text>
         <GradientButton
           title="ПРОДЪЛЖИ"
-          onPress={() => router.navigate("/")}
+          onPress={() => router.navigate("/questions")}
           style={{ marginTop: 20 }}
         />
       </View>
