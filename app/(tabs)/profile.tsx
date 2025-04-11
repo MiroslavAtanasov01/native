@@ -1,4 +1,4 @@
-import { Image, Text, View, BackHandler } from "react-native";
+import { Image, Text, View, BackHandler, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { ProfileInfo } from "@/types/types";
 import styles from "@/styles/profile";
@@ -30,7 +30,7 @@ const Profile = () => {
     : require("../../assets/images/profile-not-found.png");
 
   return (
-    <View>
+    <ScrollView alwaysBounceVertical={false}>
       <Header title="ГРАЖДАНИ НА КВАРТАЛА" subtitle="ИВАН ИВАНОВ" />
       <View>
         <View
@@ -123,10 +123,11 @@ const Profile = () => {
             title="ПРОДЪЛЖИ"
             onPress={() => router.navigate("/questions")}
             style={styles.buttonStyle}
+            icon="arrow"
           />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -17,7 +17,7 @@ import { styles } from "@/styles/reply";
 
 const Reply = () => {
   return (
-    <ScrollView>
+    <ScrollView alwaysBounceVertical={false}>
       <View>
         <View style={styles.image}>
           <Check width={120} height={120} />
@@ -68,6 +68,7 @@ const Reply = () => {
             title="ПРОДЪЛЖИ"
             onPress={() => router.navigate("/questions/question")}
             style={{ width: "60%", margin: "auto", marginVertical: 15 }}
+            icon="arrow"
           />
         </View>
         <GradientButton

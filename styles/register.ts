@@ -69,12 +69,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   picker: {
-    // lineHeight: 32,
-    //TODO height
-    height: 32,
-    // fontSize: 20,
     color: "#25509A",
-    // fontWeight: "bold",
+    marginTop: -12,
   },
   pickerItem: {},
   pickerWrapper: {
@@ -85,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     overflow: "hidden",
     margin: "auto",
+    height: 32,
   },
   optionsContainer: {
     flexDirection: "row",
@@ -146,6 +143,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 10,
+  },
+  gradientButton: {
+    marginTop: 15,
+    width: "60%",
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });
 

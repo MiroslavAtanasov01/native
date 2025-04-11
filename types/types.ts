@@ -1,6 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
-export type IconType = "heart" | "questionMark";
+export type IconType = "heart" | "questionMark" | "arrow";
 
 export interface ProfileInfo {
   name: string;

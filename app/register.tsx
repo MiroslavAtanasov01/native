@@ -1,5 +1,5 @@
 import { Text, View, Pressable, ScrollView } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
 import styles from "@/styles/register";
@@ -191,7 +191,7 @@ const register = () => {
             <GradientButton
               title="НАПРЕД"
               onPress={nextScreen}
-              style={{ marginTop: 15, width: "60%", margin: "auto" }}
+              style={styles.gradientButton}
             />
           </>
         )}
@@ -291,7 +291,7 @@ const register = () => {
             <GradientButton
               title="РЕГИСТРАЦИЯ"
               onPress={register}
-              style={{ marginTop: 15, width: "60%", margin: "auto" }}
+              style={styles.gradientButton}
             />
           </>
         )}

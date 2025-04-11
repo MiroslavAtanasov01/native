@@ -4,8 +4,9 @@ import GradientButton from "@/components/GradientButton";
 import { useRouter } from "expo-router";
 import Logo from "@/components/Logo";
 import { FlatList } from "react-native";
+import { Colors } from "@/constants/Colors";
 
-const index = () => {
+const IndexScreen = () => {
   const router = useRouter();
 
   const data: string[] = [
@@ -17,60 +18,115 @@ const index = () => {
   ];
 
   return (
-    <View>
+    <View style={styles.container}>
       <Logo />
-      <View className="bg-tab p-3">
-        <Text className="text-center p-1 text-white text-base">
-          Проект за пряка демокрация към Гражданите "Граждани на квартала".
-        </Text>
-        <Text className="text-center p-1 text-white text-base">
-          Прозрачност на мнението на Гражданите.
-        </Text>
-        <Text className="text-center p-1 text-white text-base">
-          Подръжка на гражданските инициативи и традиционните европейски
-          ценности.
-        </Text>
-        <Text className="text-3xl text-white text-center p-5">
-          ВИЕ НЕ СТЕ САМИ!!!
-        </Text>
-        <View style={styles.listContainer}>
-          <FlatList
-            data={data}
-            className="text-center"
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.listItem}>
-                <Image
-                  source={require("../assets/images/check.png")}
-                  resizeMode="contain"
-                />
-                <Text className="text-white text-base ml-5">{item}</Text>
-              </View>
-            )}
-          />
+
+      <View style={styles.middleContent}>
+        <View style={styles.blueSection}>
+          <Text style={styles.sectionText}>
+            Проект за пряка демокрация към Гражданите "Граждани на квартала".
+          </Text>
+          <Text style={styles.sectionText}>
+            Прозрачност на мнението на Гражданите.
+          </Text>
+          <Text style={styles.sectionText}>
+            Подръжка на гражданските инициативи и традиционните европейски
+            ценности.
+          </Text>
+          <Text style={styles.highlightText}>ВИЕ НЕ СТЕ САМИ!!!</Text>
+          <View style={styles.listContainer}>
+            <FlatList
+              data={data}
+              scrollEnabled={false}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View style={styles.listItem}>
+                  <Image
+                    source={require("../assets/images/check.png")}
+                    style={styles.checkIcon}
+                  />
+                  <Text style={styles.listItemText}>{item}</Text>
+                </View>
+              )}
+            />
+          </View>
         </View>
+
+        <Text style={styles.orangeSectionText}>Ние търсим вашето мнение</Text>
       </View>
-      <Text className="text-2xl text-white bg-customOrange text-center p-4">
-        Ние търсим вашето мнение
-      </Text>
+
       <GradientButton
         title="РЕГИСТРИРАЙ СЕ"
-        onPress={() => router.navigate("/questions")} // preregister
-        style={{ marginTop: 15, width: "60%", margin: "auto" }}
+        onPress={() => router.navigate("/preregister")}
+        style={styles.registerButton}
       />
     </View>
   );
 };
 
-export default index;
-
 const styles = StyleSheet.create({
-  listItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+  middleContent: {
+    flex: 1,
+    // justifyContent: "center", // Center content vertically if it's shorter than the space
+  },
+
+  blueSection: {
+    backgroundColor: Colors.primary,
+    padding: 12,
+  },
+  sectionText: {
+    textAlign: "center",
+    padding: 4,
+    color: "white",
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  highlightText: {
+    fontSize: 28,
+    color: "white",
+    textAlign: "center",
+    padding: 20,
+    fontWeight: "bold",
   },
   listContainer: {
-    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  listItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 12,
+  },
+  checkIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: "contain",
+    marginRight: 10,
+    marginTop: 2,
+  },
+  listItemText: {
+    color: "white",
+    fontSize: 16,
+    flex: 1,
+    flexShrink: 1,
+  },
+  orangeSectionText: {
+    fontSize: 24,
+    color: "white",
+    backgroundColor: Colors.info,
+    textAlign: "center",
+    padding: 16,
+    fontWeight: "bold",
+  },
+  registerButton: {
+    width: "70%",
+    alignSelf: "center",
+    marginTop: 15,
+    marginBottom: 20,
   },
 });
+
+export default IndexScreen;

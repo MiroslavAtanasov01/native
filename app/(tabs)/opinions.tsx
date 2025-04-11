@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import Header from "@/components/Header";
 import GradientButton from "@/components/GradientButton";
 import CustomTextInput from "@/components/CustomTextInput";
 import { Colors } from "@/constants/Colors";
+import { router } from "expo-router";
 
 const Opinions = () => {
   const [opinionText, setOpinionText] = useState("");
   const [topicText, setTopicText] = useState("");
+
+  const sendOpinion = () => {
+    if (!opinionText || !topicText) {
+      // TODO send opinion to server
+      console.log("Opinion sent:", opinionText);
+      console.log("Topic sent:", topicText);
+      setOpinionText("");
+      setTopicText("");
+      router.navigate("/questions");
+    }
+  };
+
+  useEffect(() => {
+    sendOpinion();
+  }, []);
 
   return (
     <ScrollView alwaysBounceVertical={false}>
@@ -64,7 +80,8 @@ const Opinions = () => {
 
       <GradientButton
         title="ИЗПРАТИ СВОЕТО МНЕНИЕ"
-        style={{ marginTop: 10, marginHorizontal: 25 }}
+        onPress={sendOpinion}
+        style={{ marginVertical: 10, marginHorizontal: 25 }}
       />
     </ScrollView>
   );

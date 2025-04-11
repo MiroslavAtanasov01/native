@@ -7,19 +7,24 @@ import {
   StyleProp,
   ViewStyle,
   Platform,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { View } from "react-native";
+import { icons } from "@/constants/Text";
 
 interface GradientButtonProps {
   title: string;
-  onPress?: (event: GestureResponderEvent) => void;
-  style?: StyleProp<ViewStyle>;
+  onPress: (event: GestureResponderEvent) => void;
+  style: StyleProp<ViewStyle>;
+  icon?: keyof typeof icons;
 }
 
 const GradientButton: React.FC<GradientButtonProps> = ({
   title,
   onPress,
   style,
+  icon,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
@@ -45,7 +50,10 @@ const GradientButton: React.FC<GradientButtonProps> = ({
           isPressed && styles.buttonPressed,
         ]}
       >
-        <Text style={styles.text}>{title}</Text>
+        <View style={styles.container}>
+          <Text style={styles.text}>{title}</Text>
+          {icon && <Image source={icons[icon]} style={styles.image} />}
+        </View>
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -59,6 +67,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
+  },
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  image: {
+    width: 20,
+    height: 20,
+    marginLeft: 10,
   },
   text: {
     color: "white",

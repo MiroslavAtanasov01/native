@@ -1,3 +1,5 @@
+import { IconType } from "@/types/types";
+
 export const ageRanges: string[] = ["18-24", "25-29", "30-34", "45-49"];
 export const incomeRanges: string[] = [
   "1-1000",
@@ -13,3 +15,9 @@ export const countriesOptions: Array<{ label: string; value: string }> = [
   { label: "България", value: "bg" },
   { label: "Русия", value: "ru" },
 ];
+
+export const icons: Record<IconType, any> = {
+  heart: require("@/assets/images/heart.png"),
+  questionMark: require("@/assets/images/question-mark.png"),
+  arrow: require("@/assets/images/right-arrow.png"),
+};
