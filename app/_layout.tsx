@@ -2,10 +2,11 @@ import { Stack } from "expo-router";
 import "./globals.css";
 import Header from "@/components/Header";
 import { StatusBar } from "react-native";
+import { QuestionProvider } from "@/context/QuestionContext";
 
 export default function RootLayout() {
   return (
-    <>
+    <QuestionProvider>
       <StatusBar barStyle="dark-content" backgroundColor="#e9ebec" />
       <Stack
         screenOptions={{
@@ -20,6 +21,6 @@ export default function RootLayout() {
         <Stack.Screen name="register" />
         <Stack.Screen name="reply" options={{ headerShown: false }} />
       </Stack>
-    </>
+    </QuestionProvider>
   );
 }

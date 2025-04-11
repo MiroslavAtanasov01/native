@@ -18,6 +18,7 @@ interface GradientButtonProps {
   onPress: (event: GestureResponderEvent) => void;
   style: StyleProp<ViewStyle>;
   icon?: keyof typeof icons;
+  disabled?: boolean;
 }
 
 const GradientButton: React.FC<GradientButtonProps> = ({
@@ -25,6 +26,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   onPress,
   style,
   icon,
+  disabled,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
@@ -35,6 +37,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
       onPressOut={() => setIsPressed(false)}
       onPress={onPress}
       style={style}
+      disabled={disabled}
     >
       <LinearGradient
         colors={

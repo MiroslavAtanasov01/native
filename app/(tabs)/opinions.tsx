@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import Header from "@/components/Header";
 import GradientButton from "@/components/GradientButton";
@@ -20,10 +20,6 @@ const Opinions = () => {
       router.navigate("/questions");
     }
   };
-
-  useEffect(() => {
-    sendOpinion();
-  }, []);
 
   return (
     <ScrollView alwaysBounceVertical={false}>
