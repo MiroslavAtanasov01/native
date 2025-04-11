@@ -47,6 +47,16 @@ const _layout = () => {
             />
           ),
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.navigate("questions", {
+              screen: "index",
+              params: {},
+            });
+            // resetQuestions(); //  Reset context state
+          },
+        })}
       />
       <Tabs.Screen
         name="opinions"
