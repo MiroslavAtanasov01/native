@@ -37,7 +37,9 @@ const _layout = () => {
         },
         tabBarShowLabel: true,
         tabBarLabel: ({ focused, children }) =>
-          focused ? <Text className="mt-2 text-white">{children}</Text> : null,
+          focused ? (
+            <Text style={{ color: "white", marginTop: 5 }}>{children}</Text>
+          ) : null,
       })}
     >
       <Tabs.Screen
@@ -52,6 +54,16 @@ const _layout = () => {
               <SpeakersBlackIcon width={42} height={42} />
             ),
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.navigate("questions", {
+              screen: "index",
+              params: {},
+            });
+            // resetQuestions(); //  Reset context state
+          },
+        })}
       />
       <Tabs.Screen
         name="opinions"

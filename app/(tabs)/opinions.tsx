@@ -5,13 +5,28 @@ import GradientButton from "@/components/GradientButton";
 import CustomTextInput from "@/components/CustomTextInput";
 import { Colors } from "@/constants/Colors";
 import OpinionsListIcon from "@/assets/images/opinions-list.svg";
+import { router } from "expo-router";
 
 const Opinions = () => {
   const [opinionText, setOpinionText] = useState("");
   const [topicText, setTopicText] = useState("");
 
+  const sendOpinion = () => {
+    if (!opinionText || !topicText) {
+      // TODO send opinion to server
+      console.log("Opinion sent:", opinionText);
+      console.log("Topic sent:", topicText);
+      setOpinionText("");
+      setTopicText("");
+      router.navigate("/questions");
+    }
+  };
+
   return (
-    <ScrollView style={{ backgroundColor: "#ffffff" }}>
+    <ScrollView
+      style={{ backgroundColor: "#ffffff" }}
+      alwaysBounceVertical={false}
+    >
       <Header title="НОВО" subtitle="МНЕНИЕ" />
 
       <OpinionsListIcon
@@ -66,7 +81,8 @@ const Opinions = () => {
 
       <GradientButton
         title="ИЗПРАТИ СВОЕТО МНЕНИЕ"
-        style={{ marginTop: 10, marginHorizontal: 25 }}
+        onPress={sendOpinion}
+        style={{ marginVertical: 10, marginHorizontal: 25 }}
       />
     </ScrollView>
   );

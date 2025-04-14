@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     //TODO
-    // padding: 20, 
+    padding: 20,
   },
   centered: {
     flex: 1,

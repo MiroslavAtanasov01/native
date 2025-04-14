@@ -1,3 +1,5 @@
+import { IconType } from "@/types/types";
+
 export const ageRanges: string[] = ["18-24", "25-29", "30-34", "45-49"];
 export const incomeRanges: string[] = [
   "1-1000",
@@ -6,12 +8,12 @@ export const incomeRanges: string[] = [
   "над 5000",
 ];
 export const genderOptions: Array<{ label: string; value: string }> = [
-  {label:"",value:""},
+  { label: "", value: "" },
   { label: "Мъж", value: "man" },
   { label: "Жена", value: "women" },
 ];
 export const professionOptions: Array<{ label: string; value: string }> = [
-  {label:"",value:""},
+  { label: "", value: "" },
   { label: "Журналист", value: "journalist" },
   { label: "Доктор", value: "doctor" },
   { label: "Пожарникар", value: "firefighter" },
@@ -19,7 +21,7 @@ export const professionOptions: Array<{ label: string; value: string }> = [
   { label: "Шофьор", value: "driver" },
 ];
 export const interestsOptions: Array<{ label: string; value: string }> = [
-  {label:"",value:""},
+  { label: "", value: "" },
   { label: "Настолни игри", value: "boardGames" },
   { label: "Голф", value: "golf" },
   { label: "Рисуване", value: "drawing" },
@@ -29,12 +31,12 @@ export const interestsOptions: Array<{ label: string; value: string }> = [
   { label: "Плуване", value: "swimming" },
 ];
 export const countriesOptions: Array<{ label: string; value: string }> = [
-  {label:"",value:""},
+  { label: "", value: "" },
   { label: "България", value: "bg" },
   { label: "Русия", value: "ru" },
 ];
 export const townOptions: Array<{ label: string; value: string }> = [
-  {label:"",value:""},
+  { label: "", value: "" },
   { label: "Варна", value: "varna" },
   { label: "София", value: "sofiq" },
   { label: "Пловдив", value: "plovdiv" },
@@ -42,7 +44,7 @@ export const townOptions: Array<{ label: string; value: string }> = [
   { label: "Велико Търново", value: "velikoTurnovo" },
 ];
 export const regionOptions: Array<{ label: string; value: string }> = [
-  {label:"",value:""},
+  { label: "", value: "" },
   { label: "Варна", value: "varna" },
   { label: "София", value: "sofiq" },
   { label: "Пловдив", value: "plovdiv" },
@@ -50,7 +52,7 @@ export const regionOptions: Array<{ label: string; value: string }> = [
   { label: "Велико Търново", value: "velikoTurnovo" },
 ];
 export const districtOptions: Array<{ label: string; value: string }> = [
-  {label:"",value:""},
+  { label: "", value: "" },
   { label: "Владиславово", value: "vladislavovo" },
   { label: "Левски", value: "levski" },
   { label: "Чайка", value: "chaika" },
@@ -60,3 +62,9 @@ export const districtOptions: Array<{ label: string; value: string }> = [
   { label: "Младост", value: "mladost" },
   { label: "Дружба", value: "druzhba" },
 ];
+
+export const icons: Record<IconType, any> = {
+  heart: require("@/assets/images/heart.png"),
+  questionMark: require("@/assets/images/question-mark.png"),
+  arrow: require("@/assets/images/right-arrow.png"),
+};

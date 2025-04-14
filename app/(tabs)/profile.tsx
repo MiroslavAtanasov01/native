@@ -1,4 +1,4 @@
-import { Image, Text, View, BackHandler } from "react-native";
+import { Text, View, BackHandler, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { ProfileInfo } from "@/types/types";
 import styles from "@/styles/profile";
@@ -41,7 +41,10 @@ const Profile = () => {
   );
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
+    <ScrollView
+      style={{ flex: 1, backgroundColor: "#ffffff" }}
+      alwaysBounceVertical={false}
+    >
       <Header title="ГРАЖДАНИ НА КВАРТАЛА" subtitle="ИВАН ИВАНОВ" />
       <View
         style={{
@@ -111,23 +114,19 @@ const Profile = () => {
         </View>
       </View>
       <View style={styles.buttonRow}>
-        {/* Button 1: Exit */}
         <GradientButton
           title="ИЗХОД"
           onPress={() => BackHandler.exitApp()}
-          // Apply flex and margin via the style prop
           style={styles.buttonStyle}
         />
-
-        {/* Button 2: Continue */}
         <GradientButton
           title="ПРОДЪЛЖИ"
-          onPress={() => router.navigate("/questions")} // Adjust route as needed
-          // Apply flex and margin via the style prop
+          onPress={() => router.navigate("/questions")}
           style={styles.buttonStyle}
+          icon="arrow"
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

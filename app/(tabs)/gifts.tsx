@@ -9,7 +9,10 @@ import styles from "@/styles/gifts";
 
 const Gifts = () => {
   return (
-    <ScrollView style={{ backgroundColor: "#ffffff" }}>
+    <ScrollView
+      style={{ backgroundColor: "#ffffff" }}
+      alwaysBounceVertical={false}
+    >
       <Header title="БЛАГОДАРНОСТ" subtitle="ИЗБЕРЕТЕ" />
       <View style={styles.imageContainer}>
         <OrangeMark />

@@ -70,16 +70,15 @@ const styles = StyleSheet.create({
   },
   picker: {
     color: "#25509A",
-    marginTop:-16 ,
+    marginTop: -16,
   },
-  pickerItem: {    
-  },
+  pickerItem: {},
   pickerWrapper: {
     width: "100%",
     borderWidth: 2,
     borderColor: "#74ACDA",
     borderRadius: 25,
-    height:32,
+    height: 32,
     backgroundColor: "white",
     overflow: "hidden",
     margin: "auto",
@@ -144,6 +143,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 10,
+  },
+  gradientButton: {
+    marginTop: 15,
+    width: "60%",
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });
 

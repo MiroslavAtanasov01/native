@@ -8,38 +8,21 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
-import { IconType } from "@/types/types";
-
-// Images
+import { icons } from "@/constants/Text";
 import Heart from "../../assets/images/heart.svg";
 import QuestionMark from "../../assets/images/question-mark.svg";
 
-const icons: Record<
-  IconType,
-  React.FC<{ width?: number; height?: number; fill?: string }>
-> = {
-  heart: Heart,
-  questionMark: QuestionMark,
-};
-
-interface GradientButtonProps {
+interface AnswerButtonProps {
   text: string;
   title: string;
   icon?: keyof typeof icons;
-  onPress?: (event: GestureResponderEvent) => void;
 }
 
-const Answer: React.FC<GradientButtonProps> = ({
-  text,
-  title,
-  icon,
-  onPress,
-}) => {
+const Answer: React.FC<AnswerButtonProps> = ({ text, title, icon }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handlePress = (event: GestureResponderEvent) => {
     setIsModalVisible(true);
-    if (onPress) onPress(event);
   };
 
   return (
