@@ -69,19 +69,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   picker: {
-    // lineHeight: 32,
-    //TODO height
-    height: 32,
-    // fontSize: 20,
     color: "#25509A",
-    // fontWeight: "bold",
+    marginTop:-16 ,
   },
-  pickerItem: {},
+  pickerItem: {    
+  },
   pickerWrapper: {
     width: "100%",
     borderWidth: 2,
     borderColor: "#74ACDA",
     borderRadius: 25,
+    height:32,
     backgroundColor: "white",
     overflow: "hidden",
     margin: "auto",

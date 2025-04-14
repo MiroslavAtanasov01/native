@@ -9,6 +9,11 @@ import CustomPicker from "@/components/CustomPicker";
 import {
   ageRanges,
   genderOptions,
+  professionOptions,
+  interestsOptions,
+  townOptions,
+  regionOptions,
+  districtOptions,
   incomeRanges,
   countriesOptions,
 } from "@/constants/Text";
@@ -170,7 +175,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, profession: value })
                     }
-                    options={genderOptions}
+                    options={professionOptions}
                   />
                 </View>
                 <View style={styles.inputSide}>
@@ -181,7 +186,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, interests: value })
                     }
-                    options={genderOptions}
+                    options={interestsOptions}
                   />
                 </View>
               </View>
@@ -217,7 +222,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, city: value })
                     }
-                    options={genderOptions}
+                    options={townOptions}
                   />
                 </View>
               </View>
@@ -230,7 +235,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, district: value })
                     }
-                    options={genderOptions}
+                    options={regionOptions}
                   />
                 </View>
                 <View style={styles.inputSide}>
@@ -241,7 +246,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, neighborhood: value })
                     }
-                    options={genderOptions}
+                    options={districtOptions}
                   />
                 </View>
               </View>
