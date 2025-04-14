@@ -41,7 +41,7 @@ const IndexScreen = () => {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <View style={styles.listItem}>
-                  <Check />
+                  <Check style={styles.checkIcon} width={20} height={20} />
                   <Text style={styles.listItemText}>{item}</Text>
                 </View>
               )}
@@ -98,8 +98,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   checkIcon: {
-    width: 20,
-    height: 20,
     resizeMode: "contain",
     marginRight: 10,
     marginTop: 2,

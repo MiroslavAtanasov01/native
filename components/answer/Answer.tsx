@@ -3,7 +3,6 @@ import {
   Text,
   GestureResponderEvent,
   View,
-  Image,
   Modal,
   TouchableOpacity,
 } from "react-native";
@@ -31,7 +30,10 @@ const Answer: React.FC<AnswerButtonProps> = ({ text, title, icon }) => {
         <View style={styles.content}>
           <QuestionMark width={38} height={38} />
           <Text style={styles.text}>{title}</Text>
-          {icon && React.createElement(icons[icon], { width: 20, height: 18 })}
+          {icon && <Heart width={20} height={18} />}
+
+          {/* Todo */}
+          {/* {icon && React.createElement(icons[icon], { width: 20, height: 18 })} */}
         </View>
       </TouchableOpacity>
 

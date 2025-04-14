@@ -27,16 +27,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexShrink: 1,
   },
-  iconQuestionMark: {
-    width: 38,
-    height: 38,
-    resizeMode: "contain",
-  },
-  iconHeart: {
-    width: 20,
-    height: 18,
-    resizeMode: "contain",
-  },
   modalBackground: {
     flex: 1,
     justifyContent: "center",

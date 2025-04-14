@@ -16,7 +16,7 @@ const PreregisterScreen = () => {
       <Logo />
 
       <View>
-        {/* <Answer text={loremIpsumTexts[0]} title="Как работи приложението?" />
+        <Answer text={loremIpsumTexts[0]} title="Как работи приложението?" />
         <Answer text={loremIpsumTexts[1]} title="Кой какво получава?" />
         <Answer text={loremIpsumTexts[2]} title="Твоята роля в квартала?" />
         <Answer text={loremIpsumTexts[3]} title="Искаме да те мотивираме!" />
@@ -24,7 +24,7 @@ const PreregisterScreen = () => {
           text={loremIpsumTexts[4]}
           title="Защити с отговори своя квартал, град и държава"
           icon="heart"
-        /> */}
+        />
       </View>
 
       <GradientButton
