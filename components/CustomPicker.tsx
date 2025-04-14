@@ -4,7 +4,6 @@ import { Picker } from "@react-native-picker/picker";
 import { MaterialIcons } from "@expo/vector-icons";
 import styles from "@/styles/register";
 import { Colors } from "@/constants/Colors";
-import { useFonts } from "expo-font";
 
 interface CustomPickerProps {
   label: string;
@@ -19,10 +18,6 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
   onValueChange,
   options,
 }) => {
-  useFonts({
-    "Roboto-Bold": require("@/assets/fonts/Roboto/static/Roboto-Bold.ttf"),
-  });
-
   return (
     <View style={styles.pickerWrapper}>
       <View>
@@ -39,7 +34,6 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
               value={option.value}
               style={{
                 fontSize: 20,
-                fontFamily: "Roboto-Bold",
               }}
             />
           ))}
