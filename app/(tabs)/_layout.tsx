@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import { Text } from "react-native";
 
 import GiftBlackIcon from "../../assets/images/gifts.svg";
@@ -12,6 +12,7 @@ import OpinionsWhiteIcon from "../../assets/images/opinions-white.svg";
 import ProfileIcon from "../../assets/images/svg/profile.svg";
 import ProfileWhiteIcon from "../../assets/images/svg/profile_white.svg";
 import Logo from "@/components/Logo";
+import { useGlobalSearchParams } from "expo-router";
 
 const _layout = () => {
   return (
@@ -54,14 +55,29 @@ const _layout = () => {
               <SpeakersBlackIcon width={42} height={42} />
             ),
         }}
-        listeners={({ navigation, route }) => ({
-          tabPress: (e) => {
-            e.preventDefault();
-            navigation.navigate("questions", {
-              screen: "index",
-              params: {},
-            });
-            // resetQuestions(); //  Reset context state
+        // listeners={({ navigation, route }) => ({
+        //   tabPress: (e) => {
+        //     e.preventDefault();
+        //     navigation.navigate("questions", {
+        //       screen: "index",
+        //       params: {},
+        //     });
+        //     // resetQuestions(); //  Reset context state
+        //   },
+        // })}
+        //TODO
+        listeners={({ navigation }) => ({
+          tabPress: () => {
+            const state = navigation.getState();
+            const isFocused =
+              state.index ===
+              state.routeNames.findIndex(
+                (name: string) => name === "questions"
+              );
+
+            if (isFocused) {
+              router.replace("/questions");
+            }
           },
         })}
       />
