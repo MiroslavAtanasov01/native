@@ -3,12 +3,13 @@ import {
   Text,
   GestureResponderEvent,
   View,
-  Image,
   Modal,
   TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
 import { icons } from "@/constants/Text";
+import Heart from "../../assets/images/heart.svg";
+import QuestionMark from "../../assets/images/question-mark.svg";
 
 interface AnswerButtonProps {
   text: string;
@@ -27,13 +28,12 @@ const Answer: React.FC<AnswerButtonProps> = ({ text, title, icon }) => {
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePress} style={styles.touchable}>
         <View style={styles.content}>
-          <Image
-            style={styles.iconQuestionMark}
-            source={icons["questionMark"]}
-            resizeMode="contain"
-          />
+          <QuestionMark width={38} height={38} />
           <Text style={styles.text}>{title}</Text>
-          {icon && <Image source={icons[icon]} style={styles.iconHeart} />}
+          {icon && <Heart width={20} height={18} />}
+
+          {/* Todo */}
+          {/* {icon && React.createElement(icons[icon], { width: 20, height: 18 })} */}
         </View>
       </TouchableOpacity>
 

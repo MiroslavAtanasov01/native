@@ -1,10 +1,11 @@
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import React from "react";
 import GradientButton from "@/components/GradientButton";
 import { useRouter } from "expo-router";
 import Logo from "@/components/Logo";
 import { FlatList } from "react-native";
 import { Colors } from "@/constants/Colors";
+import Check from "@/assets/images/check.svg";
 
 const IndexScreen = () => {
   const router = useRouter();
@@ -20,7 +21,6 @@ const IndexScreen = () => {
   return (
     <View style={styles.container}>
       <Logo />
-
       <View style={styles.middleContent}>
         <View style={styles.blueSection}>
           <Text style={styles.sectionText}>
@@ -41,10 +41,7 @@ const IndexScreen = () => {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <View style={styles.listItem}>
-                  <Image
-                    source={require("../assets/images/check.png")}
-                    style={styles.checkIcon}
-                  />
+                  <Check style={styles.checkIcon} width={20} height={20} />
                   <Text style={styles.listItemText}>{item}</Text>
                 </View>
               )}
@@ -101,8 +98,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   checkIcon: {
-    width: 20,
-    height: 20,
     resizeMode: "contain",
     marginRight: 10,
     marginTop: 2,

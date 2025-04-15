@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     color: "#25509A",
-    marginTop: -12,
+    marginTop: -16,
   },
   pickerItem: {},
   pickerWrapper: {
@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#74ACDA",
     borderRadius: 25,
+    height: 32,
     backgroundColor: "white",
     overflow: "hidden",
     margin: "auto",
-    height: 32,
   },
   optionsContainer: {
     flexDirection: "row",

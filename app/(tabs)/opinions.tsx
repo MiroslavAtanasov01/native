@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import GradientButton from "@/components/GradientButton";
 import CustomTextInput from "@/components/CustomTextInput";
 import { Colors } from "@/constants/Colors";
+import OpinionsListIcon from "@/assets/images/opinions-list.svg";
 import { router } from "expo-router";
 
 const Opinions = () => {
@@ -22,12 +23,16 @@ const Opinions = () => {
   };
 
   return (
-    <ScrollView alwaysBounceVertical={false}>
+    <ScrollView
+      style={{ backgroundColor: "#ffffff" }}
+      alwaysBounceVertical={false}
+    >
       <Header title="НОВО" subtitle="МНЕНИЕ" />
 
-      <Image
+      <OpinionsListIcon
+        width={70}
+        height={70}
         style={{ alignSelf: "center", margin: 10 }}
-        source={require("../../assets/images/opinions-list.png")}
       />
 
       <Text style={opinionStyles.opinionTitle}>СПОДЕЛЕТЕ СВОЕТО МНЕНИЕ</Text>

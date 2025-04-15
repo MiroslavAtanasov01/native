@@ -1,14 +1,11 @@
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import React from "react";
+import LogoImg from "../assets/images/Logo.svg";
 
 const Logo = () => {
   return (
     <View style={styles.header}>
-      <Image
-        source={require("../assets/images/Logo.png")}
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <LogoImg width={Dimensions.get("window").width * 1} height={70} />
     </View>
   );
 };

@@ -10,6 +10,9 @@ export default function RootLayout() {
       <StatusBar barStyle="dark-content" backgroundColor="#e9ebec" />
       <Stack
         screenOptions={{
+          contentStyle: {
+            backgroundColor: "#ffffff",
+          },
           header: () => (
             <Header title="ГАЛЕРИЯ В ПОДКРЕПА" subtitle="НА НАШИТЕ ГРАЖДАНИ" />
           ),

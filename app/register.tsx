@@ -9,6 +9,11 @@ import CustomPicker from "@/components/CustomPicker";
 import {
   ageRanges,
   genderOptions,
+  professionOptions,
+  interestsOptions,
+  townOptions,
+  regionOptions,
+  districtOptions,
   incomeRanges,
   countriesOptions,
 } from "@/constants/Text";
@@ -16,6 +21,7 @@ import CustomTextInput from "@/components/CustomTextInput";
 import SelectableButtonGroup from "@/components/SelectableButtonGroup";
 import { Image } from "react-native";
 import { Colors } from "@/constants/Colors";
+import OrangeMark from "@/assets/images/orange-mark.svg";
 
 const register = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -172,7 +178,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, profession: value })
                     }
-                    options={genderOptions}
+                    options={professionOptions}
                   />
                 </View>
                 <View style={styles.inputSide}>
@@ -183,7 +189,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, interests: value })
                     }
-                    options={genderOptions}
+                    options={interestsOptions}
                   />
                 </View>
               </View>
@@ -219,7 +225,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, city: value })
                     }
-                    options={genderOptions}
+                    options={townOptions}
                   />
                 </View>
               </View>
@@ -232,7 +238,7 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, district: value })
                     }
-                    options={genderOptions}
+                    options={regionOptions}
                   />
                 </View>
                 <View style={styles.inputSide}>
@@ -243,15 +249,12 @@ const register = () => {
                     onValueChange={(value) =>
                       setProfileInfo({ ...profileInfo, neighborhood: value })
                     }
-                    options={genderOptions}
+                    options={districtOptions}
                   />
                 </View>
               </View>
               <View style={styles.textContainer}>
-                <Image
-                  style={{ marginRight: 10 }}
-                  source={require("./../assets/images/orange-mark.png")}
-                />
+                <OrangeMark style={{ padding: 15 }} />
                 <Text style={styles.text}>ВАШИТЕ ДАННИ ЩЕ БЪДАТ СКРИТИ</Text>
               </View>
               <View style={styles.inputContainer}>

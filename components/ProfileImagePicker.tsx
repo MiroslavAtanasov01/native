@@ -3,6 +3,8 @@ import * as ImagePicker from "expo-image-picker";
 import styles from "@/styles/register";
 import React from "react";
 import { todayDate } from "@/utils/text";
+import Camera from "@/assets/images/camera.svg";
+import ProfileImageNotFound from "@/assets/images/profile-not-found.svg";
 
 interface ProfileImagePickerProps {
   profileImage: string | null;
@@ -31,22 +33,14 @@ const ProfileImagePicker: React.FC<ProfileImagePickerProps> = ({
       <Text style={styles.data}>{`ДАТА:\n ${todayDate}`}</Text>
 
       <View style={styles.imgContainer}>
-        <Image
-          source={
-            profileImage
-              ? { uri: profileImage }
-              : require("../assets/images/profile-not-found.png")
-          }
-          style={
-            profileImage ? styles.profileImage : styles.profileImageNotFound
-          }
-        />
+        {profileImage ? (
+          <Image source={{ uri: profileImage }} style={styles.profileImage} />
+        ) : (
+          <ProfileImageNotFound style={styles.profileImageNotFound} />
+        )}
       </View>
       <TouchableOpacity onPress={pickImage}>
-        <Image
-          source={require("../assets/images/camera.png")}
-          style={{ width: 30, height: 20 }}
-        />
+        <Camera width={30} height={25} />
       </TouchableOpacity>
     </View>
   );
