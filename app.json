@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "ГРАЖДАНИ НА КВАРТАЛА",
-    "slug": "mobile",
+    "slug": "grazhdani-na-kvartala",
+    "owner": "fshn1994",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app_logo.png",
@@ -9,9 +10,12 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.gk.grazhdani",
+      "supportsTablet": true,
+      "usesAppleSignIn": true
     },
     "android": {
+      "package": "com.gk.grazhdani",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app_logo.png",
         "backgroundColor": "#ffffff"
@@ -29,7 +33,6 @@
         {
           "photosPermission": "custom photos permission",
           "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
-
           "//": "Disables the microphone permission",
           "microphonePermission": false
         }
@@ -46,6 +49,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a19ee205-93b3-4002-964b-e0c502b846e4"
+      }
     }
   }
 }
