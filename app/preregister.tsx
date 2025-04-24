@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
 import Logo from "@/components/Logo";
@@ -15,13 +15,23 @@ import Answer from "@/components/answer/Answer";
 import loremIpsumTexts from "@/utils/text";
 import GoogleSignInButton from "@/components/auth/GoogleSignInButton";
 import AppleSignInButton from "@/components/auth/AppleSignInButton";
+import { useAuth } from "@/context/AuthContext";
+import { Colors } from "@/constants/Colors";
 
 const PreregisterScreen = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const auth = useAuth();
+  const user = auth?.user;
 
   const handlePress = (event: GestureResponderEvent) => {
     setIsModalVisible(true);
   };
+
+  useEffect(() => {
+    if (user) {
+      setIsModalVisible(false);
+    }
+  }, [user]);
 
   return (
     <ScrollView
@@ -42,17 +52,22 @@ const PreregisterScreen = () => {
           icon="heart"
         />
       </View>
-
-      <GradientButton
-        title="ВХОД"
-        style={styles.registerButton}
-        onPress={handlePress}
-      />
-      <GradientButton
-        title="РЕГИСТРАЦИЯ"
-        style={styles.registerButton}
-        onPress={() => router.navigate("/register")}
-      />
+      {user ? (
+        <>
+          <Text style={styles.linkText}>Изпълнено влизане чрез Google</Text>
+          <GradientButton
+            title="РЕГИСТРАЦИЯ"
+            style={styles.registerButton}
+            onPress={() => router.navigate("/register")}
+          />
+        </>
+      ) : (
+        <GradientButton
+          title="ВХОД"
+          style={styles.registerButton}
+          onPress={handlePress}
+        />
+      )}
 
       <Modal
         animationType="slide"
@@ -67,8 +82,7 @@ const PreregisterScreen = () => {
         >
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Влизане в системата</Text>
-            <AppleSignInButton />
-            <GoogleSignInButton />
+            {/* <AppleSignInButton /> */}
             <GoogleSignInButton />
           </View>
         </TouchableOpacity>
@@ -114,6 +128,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 30,
     textAlign: "center",
+  },
+  linkText: {
+    textAlign: "center",
+    padding: 18,
+    color: Colors.primary,
   },
 });
 

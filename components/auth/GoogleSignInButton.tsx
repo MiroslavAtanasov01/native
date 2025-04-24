@@ -1,41 +1,54 @@
 import React, { useEffect } from "react";
-import {
-  Button,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "@/context/AuthContext";
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function GoogleSignInButton() {
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+  const { signIn } = useAuth();
+  const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
-      "440740346191-b5m2samr4jn1oairv7fop56h7p6uvq2r.apps.googleusercontent.com",
+      "440740346191-7rrhraaqlrad7j9kp1qp3cemm8aknjqe.apps.googleusercontent.com",
     iosClientId:
-      "440740346191-j1jroelkstff43lsmu72p2bak0v4dakc.apps.googleusercontent.com",
+      "440740346191-car7l0blotkmb3jqfovpof3gcb5iqv28.apps.googleusercontent.com",
     androidClientId:
-      "440740346191-cs5fp6i9qiffcsr6lnr5rd3br6u8e7i4.apps.googleusercontent.com",
+      "440740346191-s4j5850bsjvqiv5akddiv986q3cp40q2.apps.googleusercontent.com",
+    scopes: ["profile", "email", "openid"],
   });
 
+  console.log("Redirect URI:", request?.redirectUri);
   useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
-      console.log("Google ID Token:", id_token);
-      // ---- IMPORTANT ----
-      // Send this id_token to your backend server for verification!
-      // Your backend verifies the token with Google, retrieves user info,
-      // and then creates a session/account in your system.
-      // Example: verifyGoogleToken(id_token);
-      // -----------------
-    } else if (response?.type === "error") {
-      console.error("Google Sign-In Error:", response.error);
-    }
-    // Handle other response types: 'cancel', 'dismiss', etc.
+    const getUserInfo = async () => {
+      if (
+        response?.type === "success" &&
+        response.authentication?.accessToken
+      ) {
+        try {
+          const res = await fetch(
+            "https://www.googleapis.com/oauth2/v3/userinfo",
+            {
+              headers: {
+                Authorization: `Bearer ${response.authentication.accessToken}`,
+              },
+            }
+          );
+          const user = await res.json();
+          await AsyncStorage.setItem("user", JSON.stringify(user));
+          signIn({
+            name: user.name,
+            email: user.email,
+            picture: user.picture,
+          });
+        } catch (error) {
+          console.error("Failed to fetch user info", error);
+        }
+      }
+    };
+
+    getUserInfo();
   }, [response]);
 
   return (

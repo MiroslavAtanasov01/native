@@ -10,16 +10,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "bundleIdentifier": "com.gk.grazhdani",
       "supportsTablet": true,
-      "usesAppleSignIn": true
+      "bundleIdentifier": "com.fshn1994.grazhdaninakvartala"
     },
     "android": {
-      "package": "com.gk.grazhdani",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app_logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.fshn1994.grazhdaninakvartala"
     },
     "web": {
       "bundler": "metro",

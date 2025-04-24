@@ -1,35 +1,46 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-interface User {
-  id: string;
+type User = {
   name: string;
-}
+  email: string;
+  picture: string;
+};
 
-interface AuthContextType {
+type AuthContextType = {
   user: User | null;
-  login: (userData: User) => void;
-  logout: () => void;
-}
+  signIn: (user: User) => Promise<void>;
+  signOut: () => Promise<void>;
+};
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const login = (userData: User) => setUser(userData);
-  const logout = () => setUser(null);
+  useEffect(() => {
+    const loadUser = async () => {
+      const json = await AsyncStorage.getItem("user");
+      if (json) setUser(JSON.parse(json));
+    };
+    loadUser();
+  }, []);
+
+  const signIn = async (user: User) => {
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  };
+
+  const signOut = async () => {
+    await AsyncStorage.removeItem("user");
+    setUser(null);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within an AuthProvider");
-  return context;
-};
+export const useAuth = () => useContext(AuthContext)!;

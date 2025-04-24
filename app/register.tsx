@@ -1,5 +1,5 @@
-import { Text, View, Pressable, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { Text, View, Pressable, ScrollView, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
 import styles from "@/styles/register";
@@ -19,11 +19,14 @@ import {
 } from "@/constants/Text";
 import CustomTextInput from "@/components/CustomTextInput";
 import SelectableButtonGroup from "@/components/SelectableButtonGroup";
-import { Image } from "react-native";
 import { Colors } from "@/constants/Colors";
 import OrangeMark from "@/assets/images/orange-mark.svg";
+import { useAuth } from "@/context/AuthContext";
 
 const register = () => {
+  const auth = useAuth();
+  const user = auth?.user;
+
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [selectedRange, setSelectedRange] = useState<string | null>(null);
   const [selectedIncome, setSelectedIncome] = useState<string | null>(null);
@@ -47,6 +50,12 @@ const register = () => {
     streetNumber: "",
   });
 
+  useEffect(() => {
+    if (user?.picture) {
+      setProfileImage(user.picture);
+    }
+  }, [user?.picture]);
+
   const nextScreen = () => {
     if (
       // profileInfo.name &&
@@ -59,6 +68,7 @@ const register = () => {
     ) {
       setShowSecondView(true);
     } else {
+      Alert.alert("Моля, попълнете всички полета.");
       setShowSecondView(false);
     }
   };
@@ -75,7 +85,8 @@ const register = () => {
     ) {
       router.navigate("/profile");
     } else {
-      console.log("error");
+      Alert.alert("Моля, попълнете всички полета.");
+      return;
     }
   };
 

@@ -1,4 +1,4 @@
-import { Text, View, BackHandler, ScrollView } from "react-native";
+import { Text, View, BackHandler, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import { ProfileInfo } from "@/types/types";
 import styles from "@/styles/profile";
@@ -14,8 +14,12 @@ import Email from "@/assets/images/profile/email.svg";
 import Gender from "@/assets/images/profile/gender.svg";
 import Interests from "@/assets/images/profile/interests.svg";
 import Profession from "@/assets/images/profile/profession.svg";
+import { useAuth } from "@/context/AuthContext";
 
 const Profile = () => {
+  const { signOut } = useAuth();
+  const auth = useAuth();
+  const user = auth?.user;
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
     name: "Иван",
     lastName: "Иванов",
@@ -40,28 +44,23 @@ const Profile = () => {
     <ProfileImgNotFound />
   );
 
+  const exit = () => {
+    signOut();
+    router.navigate("/preregister");
+  };
+
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "#ffffff" }}
       alwaysBounceVertical={false}
     >
       <Header title="ГРАЖДАНИ НА КВАРТАЛА" subtitle="ИВАН ИВАНОВ" />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginVertical: 10,
-        }}
-      >
-        <ProfileImgNotFound
-          style={{
-            width: 120,
-            height: 120,
-            padding: 60,
-            borderRadius: "50%",
-            backgroundColor: "#e9ebec",
-          }}
-        />
+      <View style={styles.imgContainer}>
+        {user?.picture ? (
+          <Image source={{ uri: user?.picture }} style={styles.profileImage} />
+        ) : (
+          <ProfileImgNotFound style={styles.profileImageNotFound} />
+        )}
       </View>
       <Text style={styles.text}>
         Вие се регистрирахте на гражданската платформа “Граждани на квартала”.
@@ -116,7 +115,7 @@ const Profile = () => {
       <View style={styles.buttonRow}>
         <GradientButton
           title="ИЗХОД"
-          onPress={() => BackHandler.exitApp()}
+          onPress={exit}
           style={styles.buttonStyle}
         />
         <GradientButton

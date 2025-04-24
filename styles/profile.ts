@@ -43,6 +43,24 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   buttonStyle: {},
+  profileImage: {
+    width: "100%",
+    height: "100%",
+  },
+  profileImageNotFound: {
+    width: 100,
+    height: 110,
+  },
+  imgContainer: {
+    width: 150,
+    height: 150,
+    backgroundColor: "#9F9FA3",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 75,
+    overflow: "hidden",
+    alignSelf: "center",
+  },
 });
 
 export default styles;
