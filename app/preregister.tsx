@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   registerButton: {
     width: "70%",
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 27,
   },
   modalBackground: {
     flex: 1,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     textAlign: "center",
-    padding: 18,
+    padding: 20,
     color: Colors.primary,
   },
 });

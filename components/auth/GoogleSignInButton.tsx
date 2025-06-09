@@ -1,47 +1,67 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import * as Google from "expo-auth-session/providers/google";
+import { makeRedirectUri } from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "@/context/AuthContext";
+import { router } from "expo-router";
+// import * as Localization from "expo-localization"; install expo-localization
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function GoogleSignInButton() {
+  // const language = Localization.locale.split("-")[0]; // e.g., 'bg-BG' → 'bg'
   const { signIn } = useAuth();
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
-      "440740346191-7rrhraaqlrad7j9kp1qp3cemm8aknjqe.apps.googleusercontent.com",
+      "305270617165-lpfncc9545mo9qobvv8b81uo7go9jqps.apps.googleusercontent.com",
     iosClientId:
-      "440740346191-car7l0blotkmb3jqfovpof3gcb5iqv28.apps.googleusercontent.com",
+      "305270617165-jvf64eggp7vogo65arfb8r9el9g3ekhl.apps.googleusercontent.com",
     androidClientId:
-      "440740346191-s4j5850bsjvqiv5akddiv986q3cp40q2.apps.googleusercontent.com",
+      "305270617165-qjbtmgg9ro0mtoudir48hsl8f7am1i0c.apps.googleusercontent.com",
     scopes: ["profile", "email", "openid"],
   });
 
   console.log("Redirect URI:", request?.redirectUri);
+
+  console.log(
+    "saas",
+    makeRedirectUri({
+      native: "com.diagrammikagk.grazhdaninakvartala:/oauthredirect",
+    })
+  );
   useEffect(() => {
     const getUserInfo = async () => {
       if (
         response?.type === "success" &&
         response.authentication?.accessToken
       ) {
+        const idToken = response.authentication.accessToken;
+        console.log("token", idToken);
+
         try {
           const res = await fetch(
-            "https://www.googleapis.com/oauth2/v3/userinfo",
+            "https://api.citizens.asicsoft.ru/api/User/Authorization",
             {
+              method: "POST",
               headers: {
-                Authorization: `Bearer ${response.authentication.accessToken}`,
+                "Content-Type": "application/json",
+                "Accept-Language": "bg", // language
               },
+              body: JSON.stringify({ idToken }),
             }
           );
-          const user = await res.json();
-          await AsyncStorage.setItem("user", JSON.stringify(user));
+          const data = await res.json();
+          await AsyncStorage.setItem("jwt", data.accessToken);
+          console.log("data", data);
+
           signIn({
-            name: user.name,
-            email: user.email,
-            picture: user.picture,
+            name: data.user.name,
+            email: data.user.email,
+            picture: data.user.picture,
           });
+          router.navigate("/preregister");
         } catch (error) {
           console.error("Failed to fetch user info", error);
         }

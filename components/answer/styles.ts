@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     width: "100%",
+    paddingVertical: 10,
   },
   text: {
     color: "#25509A",
-    fontSize: 18,
+    fontSize: 22,
     flex: 1,
     flexShrink: 1,
   },

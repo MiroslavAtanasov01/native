@@ -2,7 +2,7 @@
   "expo": {
     "name": "ГРАЖДАНИ НА КВАРТАЛА",
     "slug": "grazhdani-na-kvartala",
-    "owner": "fshn1994",
+    "owner": "diagrammikagk",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app_logo.png",
@@ -11,14 +11,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fshn1994.grazhdaninakvartala"
+      "bundleIdentifier": "com.diagrammikagk.grazhdaninakvartala"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app_logo.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.fshn1994.grazhdaninakvartala"
+      "package": "com.diagrammikagk.grazhdaninakvartala"
     },
     "web": {
       "bundler": "metro",
@@ -54,7 +54,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "a19ee205-93b3-4002-964b-e0c502b846e4"
+        "projectId": "a39c8d69-f964-413e-837e-f747f2bf62a0"
       }
     }
   }
