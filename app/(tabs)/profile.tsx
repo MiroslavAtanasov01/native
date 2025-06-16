@@ -1,10 +1,16 @@
 import { Text, View, BackHandler, ScrollView, Image } from "react-native";
-import React, { useState } from "react";
-import { ProfileInfo } from "@/types/types";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/profile";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
 import Header from "@/components/Header";
+import {
+  ageRangesValues,
+  beliefsOptionsValues,
+  genderOptionsValues,
+  incomeRangesValues,
+  professionOptionsValues,
+} from "@/constants/Text";
 
 // Images
 import ProfileImg from "@/assets/images/profile.svg";
@@ -15,34 +21,24 @@ import Gender from "@/assets/images/profile/gender.svg";
 import Interests from "@/assets/images/profile/interests.svg";
 import Profession from "@/assets/images/profile/profession.svg";
 import { useAuth } from "@/context/AuthContext";
+import { getUser } from "@/services/GetUser";
 
 const Profile = () => {
-  const { signOut } = useAuth();
-  const auth = useAuth();
-  const user = auth?.user;
-  const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
-    name: "Иван",
-    lastName: "Иванов",
-    email: "vankata@gmail.com",
-    image: "https://www.pexels.com/search/cat/",
-    gender: "Мъж",
-    age: "25-29",
-    monthlyIncome: "над 5000",
-    profession: "Професия",
-    interests: "Интереси",
-    country: "България",
-    city: "Варна",
-    district: "",
-    neighborhood: "",
-    street: "",
-    streetNumber: "",
-  });
+  const { user, signOut, signIn } = useAuth();
 
-  const profileImageSource = profileInfo.image ? (
-    { uri: profileInfo.image }
-  ) : (
-    <ProfileImgNotFound />
-  );
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const latestUser = await getUser();
+        console.log(latestUser);
+        await signIn(latestUser);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const exit = () => {
     signOut();
@@ -54,10 +50,18 @@ const Profile = () => {
       style={{ flex: 1, backgroundColor: "#ffffff" }}
       alwaysBounceVertical={false}
     >
-      <Header title="ГРАЖДАНИ НА КВАРТАЛА" subtitle="ИВАН ИВАНОВ" />
+      <Header
+        title="ГРАЖДАНИ НА КВАРТАЛА"
+        subtitle={`${user?.name.toUpperCase() ?? ""} ${
+          user?.surname.toUpperCase() ?? ""
+        }`}
+      />
       <View style={styles.imgContainer}>
-        {user?.picture ? (
-          <Image source={{ uri: user?.picture }} style={styles.profileImage} />
+        {user?.photoFileUrl ? (
+          <Image
+            source={{ uri: user?.photoFileUrl }}
+            style={styles.profileImage}
+          />
         ) : (
           <ProfileImgNotFound style={styles.profileImageNotFound} />
         )}
@@ -74,41 +78,68 @@ const Profile = () => {
           {/* Email */}
           <View style={styles.content}>
             <Email height={20} width={20} style={{ marginRight: 15 }} />
-            <Text style={styles.info}>{profileInfo.email}</Text>
+            <Text style={styles.info}>{user?.email}</Text>
           </View>
 
           {/* Name */}
           <View style={styles.content}>
             <ProfileImg height={20} width={20} style={{ marginRight: 15 }} />
-            <Text
-              style={styles.info}
-            >{`${profileInfo.name} ${profileInfo.lastName}`}</Text>
+            <Text style={styles.info}>{`${user?.name} ${user?.surname}`}</Text>
           </View>
 
           {/* Gender & Age */}
           <View style={styles.content}>
             <Gender height={20} width={20} style={{ marginRight: 15 }} />
-            <Text
-              style={styles.info}
-            >{`${profileInfo.gender} ${profileInfo.age}`}</Text>
+            <Text style={styles.info}>{`${
+              genderOptionsValues[
+                (user?.userCharacteristic?.gender ??
+                  "") as keyof typeof genderOptionsValues
+              ]
+            } ${
+              ageRangesValues[
+                (user?.userCharacteristic?.age ??
+                  "") as keyof typeof ageRangesValues
+              ]
+            }`}</Text>
           </View>
 
           {/* Income */}
           <View style={styles.content}>
             <CurrencyImg height={20} width={20} style={{ marginRight: 15 }} />
-            <Text style={styles.info}>{profileInfo.monthlyIncome}</Text>
+            <Text style={styles.info}>
+              {
+                incomeRangesValues[
+                  (user?.userCharacteristic?.income ??
+                    "") as keyof typeof incomeRangesValues
+                ]
+              }
+            </Text>
           </View>
 
           {/* Profession */}
           <View style={styles.content}>
             <Profession height={20} width={20} style={{ marginRight: 15 }} />
-            <Text style={styles.info}>{profileInfo.profession}</Text>
+            <Text style={styles.info}>
+              {
+                professionOptionsValues[
+                  (user?.userCharacteristic?.profession ??
+                    "") as keyof typeof professionOptionsValues
+                ]
+              }
+            </Text>
           </View>
 
           {/* Interests */}
           <View style={styles.content}>
             <Interests height={20} width={20} style={{ marginRight: 15 }} />
-            <Text style={styles.info}>{profileInfo.interests}</Text>
+            <Text style={styles.info}>
+              {
+                beliefsOptionsValues[
+                  (user?.userCharacteristic?.belief ??
+                    "") as keyof typeof beliefsOptionsValues
+                ]
+              }
+            </Text>
           </View>
         </View>
       </View>
