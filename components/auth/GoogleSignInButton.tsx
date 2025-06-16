@@ -24,9 +24,8 @@ export default function GoogleSignInButton() {
   });
 
   console.log("Redirect URI:", request?.redirectUri);
-
   console.log(
-    "saas",
+    "makeRedirectUri",
     makeRedirectUri({
       native: "com.diagrammikagk.grazhdaninakvartala:/oauthredirect",
     })
@@ -54,14 +53,11 @@ export default function GoogleSignInButton() {
           );
           const data = await res.json();
           await AsyncStorage.setItem("jwt", data.accessToken);
-          console.log("data", data);
 
-          signIn({
-            name: data.user.name,
-            email: data.user.email,
-            picture: data.user.picture,
-          });
-          router.navigate("/preregister");
+          signIn(data.user);
+          if (data.user.isCharacteristicFilled) {
+            router.navigate("/questions");
+          }
         } catch (error) {
           console.error("Failed to fetch user info", error);
         }

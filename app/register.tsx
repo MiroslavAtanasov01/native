@@ -3,14 +3,19 @@ import React, { useEffect, useState } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
 import styles from "@/styles/register";
-import { ProfileInfo } from "@/types/types";
+import {
+  ProfileInfo,
+  User,
+  UserCharacteristic,
+  UserLocation,
+} from "@/types/types";
 import ProfileImagePicker from "@/components/ProfileImagePicker";
 import CustomPicker from "@/components/CustomPicker";
 import {
   ageRanges,
   genderOptions,
   professionOptions,
-  interestsOptions,
+  beliefsOptions,
   townOptions,
   regionOptions,
   districtOptions,
@@ -22,15 +27,41 @@ import SelectableButtonGroup from "@/components/SelectableButtonGroup";
 import { Colors } from "@/constants/Colors";
 import OrangeMark from "@/assets/images/orange-mark.svg";
 import { useAuth } from "@/context/AuthContext";
+import { updateUser } from "@/services/UpdateUser";
 
-const register = () => {
+const Register = () => {
   const auth = useAuth();
   const user = auth?.user;
 
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [selectedRange, setSelectedRange] = useState<string | null>(null);
-  const [selectedIncome, setSelectedIncome] = useState<string | null>(null);
+  const [selectedRange, setSelectedRange] = useState<{
+    label: string;
+    value: string;
+  } | null>(null);
+  const [selectedIncome, setSelectedIncome] = useState<{
+    label: string;
+    value: string;
+  } | null>(null);
+
   const [showSecondView, setShowSecondView] = useState(false);
+
+  const [userCharacteristic, setUserCharacteristic] =
+    useState<UserCharacteristic>({
+      gender: "",
+      income: "",
+      age: "",
+      profession: "",
+      belief: "",
+    });
+
+  const [userLocation, setUserLocation] = useState<UserLocation>({
+    country: "",
+    city: "",
+    district: "",
+    area: "",
+    street: "",
+    houseNumber: "",
+  });
 
   const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
     name: "",
@@ -41,7 +72,7 @@ const register = () => {
     age: "",
     monthlyIncome: "",
     profession: "",
-    interests: "",
+    belief: "",
     country: "",
     city: "",
     district: "",
@@ -51,19 +82,25 @@ const register = () => {
   });
 
   useEffect(() => {
-    if (user?.picture) {
-      setProfileImage(user.picture);
+    if (user) {
+      setProfileImage(user.photoFileUrl || null);
+      setProfileInfo((prev) => ({
+        ...prev,
+        name: user.name,
+        lastName: user.surname,
+        email: user.email,
+      }));
     }
-  }, [user?.picture]);
+  }, [user]);
 
   const nextScreen = () => {
     if (
-      // profileInfo.name &&
-      // profileInfo.lastName &&
-      // profileInfo.gender &&
-      // profileInfo.profession &&
-      // profileInfo.interests &&
-      // selectedRange &&
+      profileInfo.name &&
+      profileInfo.lastName &&
+      profileInfo.gender &&
+      profileInfo.profession &&
+      profileInfo.belief &&
+      selectedRange &&
       selectedIncome
     ) {
       setShowSecondView(true);
@@ -73,20 +110,43 @@ const register = () => {
     }
   };
 
-  const register = () => {
+  const register = async () => {
     if (
-      // profileInfo.country &&
-      // profileInfo.city &&
-      // profileInfo.district &&
-      // profileInfo.neighborhood &&
-      // profileInfo.street &&
-      // profileInfo.streetNumber &&
-      profileInfo.email
+      profileInfo.country &&
+      profileInfo.city &&
+      profileInfo.district &&
+      profileInfo.neighborhood &&
+      profileInfo.street &&
+      profileInfo.streetNumber
     ) {
+      const updatedUser: User = {
+        ...user!,
+        name: profileInfo.name,
+        surname: profileInfo.lastName,
+        isCharacteristicFilled: true,
+        isLocationFilled: true,
+        userCharacteristic: {
+          gender: profileInfo.gender,
+          income: selectedIncome?.value || "",
+          age: selectedRange?.value || "",
+          profession: profileInfo.profession,
+          belief: profileInfo.belief,
+        },
+        userLocation: {
+          country: profileInfo.country,
+          city: profileInfo.city,
+          district: profileInfo.district,
+          area: profileInfo.neighborhood,
+          street: profileInfo.street,
+          houseNumber: profileInfo.streetNumber,
+        },
+      };
+
+      await auth.signIn(updatedUser);
+      await updateUser(updatedUser);
       router.navigate("/profile");
     } else {
       Alert.alert("Моля, попълнете всички полета.");
-      return;
     }
   };
 
@@ -150,10 +210,10 @@ const register = () => {
               <Text style={styles.label}>МЕСЕЧЕН ДОХОД В ЕВРО</Text>
               <View style={styles.optionsIncomeContainer}>
                 {incomeRanges.map((range) => {
-                  const isSelected = selectedIncome === range;
+                  const isSelected = selectedIncome?.label === range.label;
                   return (
                     <Pressable
-                      key={range}
+                      key={range.value}
                       style={styles.buttonWrapper}
                       onPress={() => setSelectedIncome(range)}
                     >
@@ -173,7 +233,7 @@ const register = () => {
                               : styles.textUnselected,
                           ]}
                         >
-                          {range}
+                          {range.label}
                         </Text>
                       </View>
                     </Pressable>
@@ -196,11 +256,11 @@ const register = () => {
                   <Text style={styles.label}>ИНТЕРЕСИ</Text>
                   <CustomPicker
                     label="ИНТЕРЕСИ"
-                    selectedValue={profileInfo.interests}
+                    selectedValue={profileInfo.belief}
                     onValueChange={(value) =>
-                      setProfileInfo({ ...profileInfo, interests: value })
+                      setProfileInfo({ ...profileInfo, belief: value })
                     }
-                    options={interestsOptions}
+                    options={beliefsOptions}
                   />
                 </View>
               </View>
@@ -314,4 +374,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

@@ -15,6 +15,7 @@ const customFetch = async <T>(
     method,
     headers: {
       "Content-Type": "application/json",
+      "Accept-Language": "bg",
       ...headers,
     },
   };

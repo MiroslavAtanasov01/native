@@ -30,7 +30,6 @@ const Profile = () => {
     const fetchUser = async () => {
       try {
         const latestUser = await getUser();
-        console.log(latestUser);
         await signIn(latestUser);
       } catch (error) {
         console.error("Failed to fetch user:", error);

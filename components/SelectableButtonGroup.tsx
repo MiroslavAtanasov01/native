@@ -3,9 +3,9 @@ import styles from "@/styles/register";
 import React from "react";
 
 interface SelectableButtonGroupProps {
-  options: string[];
-  selectedValue: string | null;
-  onSelect: (value: string) => void;
+  options: Array<{ label: string; value: string }>;
+  selectedValue: { label: string; value: string } | null;
+  onSelect: ({ label, value }: { label: string; value: string }) => void;
 }
 
 const SelectableButtonGroup: React.FC<SelectableButtonGroupProps> = ({
@@ -16,10 +16,10 @@ const SelectableButtonGroup: React.FC<SelectableButtonGroupProps> = ({
   return (
     <>
       {options.map((option) => {
-        const isSelected = selectedValue === option;
+        const isSelected = selectedValue?.label === option.label;
         return (
           <Pressable
-            key={option}
+            key={option.value}
             style={[
               styles.buttonBase,
               isSelected ? styles.buttonSelected : styles.buttonUnselected,
@@ -32,7 +32,7 @@ const SelectableButtonGroup: React.FC<SelectableButtonGroupProps> = ({
                 isSelected ? styles.textSelected : styles.textUnselected,
               ]}
             >
-              {option}
+              {option.label}
             </Text>
           </Pressable>
         );
