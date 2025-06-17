@@ -1,5 +1,5 @@
 import { patch } from "@/services/api";
-import { UpdateUserPayload } from "@/types/types";
+import { UpdateUserPayload, User } from "@/types/types";
 import { getAuthToken } from "@/utils/getToken";
 
 export const updateUser = async (payload: UpdateUserPayload) => {
@@ -9,7 +9,7 @@ export const updateUser = async (payload: UpdateUserPayload) => {
     throw new Error("No auth token found");
   }
 
-  return patch<any, UpdateUserPayload>("/User", payload, {
+  return patch<User, UpdateUserPayload>("/api/User", payload, {
     Authorization: `Bearer ${token}`,
     "Accept-Language": "bg",
   });

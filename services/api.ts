@@ -1,5 +1,5 @@
 type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-const BASE_URL = "https://api.citizens.asicsoft.ru/api";
+const BASE_URL = "https://api.citizens.asicsoft.ru";
 
 interface FetchOptions {
   method: HttpMethod;
@@ -9,28 +9,44 @@ interface FetchOptions {
 
 const customFetch = async <T>(
   url: string,
-  { method, body, headers }: FetchOptions
+  { method, body, headers = {} }: FetchOptions
 ): Promise<T> => {
+  const isFormData = body instanceof FormData;
+
   const config: RequestInit = {
     method,
     headers: {
-      "Content-Type": "application/json",
-      "Accept-Language": "bg",
       ...headers,
     },
   };
 
   if (body) {
-    config.body = JSON.stringify(body);
+    if (isFormData) {
+      config.body = body;
+    } else {
+      (config.headers as Record<string, string>)["Content-Type"] =
+        "application/json";
+      (config.headers as Record<string, string>)["Accept"] = "application/json";
+      config.body = JSON.stringify(body);
+    }
   }
+
+  (config.headers as Record<string, string>)["Accept-Language"] = "bg";
 
   const response = await fetch(`${BASE_URL}${url}`, config);
 
   if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Server responded with error:", errorText);
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  return response.json();
+  const responseText = await response.text();
+  try {
+    return JSON.parse(responseText) as T;
+  } catch (e) {
+    return responseText as unknown as T;
+  }
 };
 
 export const get = async <Res>(

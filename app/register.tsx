@@ -23,6 +23,7 @@ import { Colors } from "@/constants/Colors";
 import OrangeMark from "@/assets/images/orange-mark.svg";
 import { useAuth } from "@/context/AuthContext";
 import { updateUser } from "@/services/UpdateUser";
+import { uploadPhoto } from "@/services/uploadUserPhoto";
 
 const Register = () => {
   const auth = useAuth();
@@ -53,12 +54,39 @@ const Register = () => {
     street: "",
     houseNumber: "",
   });
+  const [photoFileName, setPhotoFileName] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (user) {
       setProfileImage(user.photoFileUrl || null);
+      setPhotoFileName(user.photoFileName || null);
     }
   }, [user]);
+
+  const handleImageSelected = async (uri: string | null) => {
+    if (!uri) {
+      setProfileImage(null);
+      setPhotoFileName(null);
+      return;
+    }
+
+    setProfileImage(uri);
+    setIsUploading(true);
+
+    try {
+      const newFileName = await uploadPhoto(uri);
+      setPhotoFileName(newFileName);
+      console.log(newFileName);
+      Alert.alert("Успех", "Снимката е качена успешно.");
+    } catch (error) {
+      console.error("Failed to upload photo:", error);
+      Alert.alert("Грешка", "Възникна грешка при качването на снимката.");
+      setProfileImage(user?.photoFileUrl || null);
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const nextScreen = () => {
     if (
@@ -83,8 +111,6 @@ const Register = () => {
       !userLocation.street ||
       !userLocation.houseNumber
     ) {
-      console.log(userLocation);
-
       Alert.alert("Моля, попълнете всички полета за адрес.");
       return;
     }
@@ -96,6 +122,7 @@ const Register = () => {
 
     const updatedUser: User = {
       ...user,
+      photoFileName: photoFileName,
       userCharacteristic,
       userLocation,
       isCharacteristicFilled: true,
@@ -123,7 +150,8 @@ const Register = () => {
       <View>
         <ProfileImagePicker
           profileImage={profileImage}
-          setProfileImage={setProfileImage}
+          onImagePicked={handleImageSelected}
+          isLoading={isUploading}
         />
         <Text style={styles.title}>РЕГИСТРАЦИЯ</Text>
 

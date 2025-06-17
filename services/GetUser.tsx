@@ -7,7 +7,7 @@ export const getUser = async (): Promise<User> => {
 
   if (!token) throw new Error("No auth token found");
 
-  return get<User>("/User", {
+  return get<User>("/api/User", {
     Authorization: `Bearer ${token}`,
     "Accept-Language": "bg",
   });
