@@ -39,7 +39,6 @@ const PreregisterScreen = () => {
     }
   }, [user]);
 
-  if (user) return null;
   return (
     <ScrollView
       style={styles.scrollView}
