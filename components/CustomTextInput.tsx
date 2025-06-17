@@ -19,6 +19,7 @@ interface CustomTextInputProps {
   counter?: Boolean;
   maxSymbols?: number;
   numSymbols?: number;
+  editable?: boolean;
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -30,6 +31,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   counter,
   numSymbols,
   maxSymbols,
+  editable,
 }) => {
   return (
     <View>
@@ -76,6 +78,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         style={[styles.input, style]}
         value={value}
         onChangeText={onChangeText}
+        editable={editable}
       />
     </View>
   );

@@ -2,24 +2,6 @@ import { ImageSourcePropType } from "react-native";
 
 export type IconType = "heart" | "questionMark" | "arrow";
 
-export interface ProfileInfo {
-  name: string;
-  lastName: string;
-  email: string;
-  image: string;
-  gender: string;
-  age: string;
-  monthlyIncome: string;
-  profession: string;
-  belief: string;
-  country: string;
-  city: string;
-  district: string;
-  neighborhood: string;
-  street: string;
-  streetNumber: string;
-}
-
 interface AnswerOption {
   id: string;
   text?: string;

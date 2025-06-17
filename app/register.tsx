@@ -3,12 +3,7 @@ import React, { useEffect, useState } from "react";
 import GradientButton from "@/components/GradientButton";
 import { router } from "expo-router";
 import styles from "@/styles/register";
-import {
-  ProfileInfo,
-  User,
-  UserCharacteristic,
-  UserLocation,
-} from "@/types/types";
+import { User, UserCharacteristic, UserLocation } from "@/types/types";
 import ProfileImagePicker from "@/components/ProfileImagePicker";
 import CustomPicker from "@/components/CustomPicker";
 import {
@@ -32,7 +27,6 @@ import { updateUser } from "@/services/UpdateUser";
 const Register = () => {
   const auth = useAuth();
   const user = auth?.user;
-
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [selectedRange, setSelectedRange] = useState<{
     label: string;
@@ -42,9 +36,7 @@ const Register = () => {
     label: string;
     value: string;
   } | null>(null);
-
   const [showSecondView, setShowSecondView] = useState(false);
-
   const [userCharacteristic, setUserCharacteristic] =
     useState<UserCharacteristic>({
       gender: "",
@@ -53,7 +45,6 @@ const Register = () => {
       profession: "",
       belief: "",
     });
-
   const [userLocation, setUserLocation] = useState<UserLocation>({
     country: "",
     city: "",
@@ -63,90 +54,64 @@ const Register = () => {
     houseNumber: "",
   });
 
-  const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
-    name: "",
-    lastName: "",
-    email: "",
-    image: "",
-    gender: "",
-    age: "",
-    monthlyIncome: "",
-    profession: "",
-    belief: "",
-    country: "",
-    city: "",
-    district: "",
-    neighborhood: "",
-    street: "",
-    streetNumber: "",
-  });
-
   useEffect(() => {
     if (user) {
       setProfileImage(user.photoFileUrl || null);
-      setProfileInfo((prev) => ({
-        ...prev,
-        name: user.name,
-        lastName: user.surname,
-        email: user.email,
-      }));
     }
   }, [user]);
 
   const nextScreen = () => {
     if (
-      profileInfo.name &&
-      profileInfo.lastName &&
-      profileInfo.gender &&
-      profileInfo.profession &&
-      profileInfo.belief &&
-      selectedRange &&
-      selectedIncome
+      userCharacteristic.gender &&
+      userCharacteristic.profession &&
+      userCharacteristic.belief &&
+      userCharacteristic.age &&
+      userCharacteristic.income
     ) {
       setShowSecondView(true);
     } else {
       Alert.alert("Моля, попълнете всички полета.");
-      setShowSecondView(false);
     }
   };
 
   const register = async () => {
     if (
-      profileInfo.country &&
-      profileInfo.city &&
-      profileInfo.district &&
-      profileInfo.neighborhood &&
-      profileInfo.street &&
-      profileInfo.streetNumber
+      !userLocation.country ||
+      !userLocation.city ||
+      !userLocation.district ||
+      !userLocation.area ||
+      !userLocation.street ||
+      !userLocation.houseNumber
     ) {
-      const updatedUser: User = {
-        ...user!,
-        name: profileInfo.name,
-        surname: profileInfo.lastName,
-        isCharacteristicFilled: true,
-        isLocationFilled: true,
-        userCharacteristic: {
-          gender: profileInfo.gender,
-          income: selectedIncome?.value || "",
-          age: selectedRange?.value || "",
-          profession: profileInfo.profession,
-          belief: profileInfo.belief,
-        },
-        userLocation: {
-          country: profileInfo.country,
-          city: profileInfo.city,
-          district: profileInfo.district,
-          area: profileInfo.neighborhood,
-          street: profileInfo.street,
-          houseNumber: profileInfo.streetNumber,
-        },
-      };
+      console.log(userLocation);
 
-      await auth.signIn(updatedUser);
+      Alert.alert("Моля, попълнете всички полета за адрес.");
+      return;
+    }
+
+    if (!user) {
+      Alert.alert("Грешка", "Сесията е изтекла, моля влезте отново.");
+      return;
+    }
+
+    const updatedUser: User = {
+      ...user,
+      userCharacteristic,
+      userLocation,
+      isCharacteristicFilled: true,
+      isLocationFilled: true,
+    };
+
+    try {
+      //add loading state if needed
       await updateUser(updatedUser);
+      await auth.signIn(updatedUser);
+
+      Alert.alert("Успех!", "Регистрацията е завършена.");
       router.navigate("/profile");
-    } else {
-      Alert.alert("Моля, попълнете всички полета.");
+    } catch (error) {
+      console.error("Failed to update user:", error);
+      Alert.alert("Грешка", "Възникна грешка при запазване на профила ви.");
     }
   };
 
@@ -170,21 +135,15 @@ const Register = () => {
                 <View style={styles.inputSide}>
                   <CustomTextInput
                     label="ИМЕ"
-                    value={profileInfo.name}
+                    value={user?.name || ""}
                     mode="text"
-                    onChangeText={(text) =>
-                      setProfileInfo({ ...profileInfo, name: text })
-                    }
                   />
                 </View>
                 <View style={styles.inputSide}>
                   <CustomTextInput
                     label="ФАМИЛИЯ"
-                    value={profileInfo.lastName}
+                    value={user?.surname || ""}
                     mode="text"
-                    onChangeText={(text) =>
-                      setProfileInfo({ ...profileInfo, lastName: text })
-                    }
                   />
                 </View>
               </View>
@@ -192,9 +151,12 @@ const Register = () => {
               <View style={{ width: "50%", margin: "auto" }}>
                 <CustomPicker
                   label="ПОЛ"
-                  selectedValue={profileInfo.gender}
+                  selectedValue={userCharacteristic.gender}
                   onValueChange={(value) =>
-                    setProfileInfo({ ...profileInfo, gender: value })
+                    setUserCharacteristic({
+                      ...userCharacteristic,
+                      gender: value,
+                    })
                   }
                   options={genderOptions}
                 />
@@ -204,7 +166,13 @@ const Register = () => {
                 <SelectableButtonGroup
                   options={ageRanges}
                   selectedValue={selectedRange}
-                  onSelect={setSelectedRange}
+                  onSelect={(range) => {
+                    setSelectedRange(range);
+                    setUserCharacteristic({
+                      ...userCharacteristic,
+                      age: range.value,
+                    });
+                  }}
                 />
               </View>
               <Text style={styles.label}>МЕСЕЧЕН ДОХОД В ЕВРО</Text>
@@ -215,7 +183,13 @@ const Register = () => {
                     <Pressable
                       key={range.value}
                       style={styles.buttonWrapper}
-                      onPress={() => setSelectedIncome(range)}
+                      onPress={() => {
+                        setSelectedIncome(range);
+                        setUserCharacteristic({
+                          ...userCharacteristic,
+                          income: range.value,
+                        });
+                      }}
                     >
                       <View
                         style={[
@@ -245,9 +219,12 @@ const Register = () => {
                   <Text style={styles.label}>ПРОФЕСИЯ</Text>
                   <CustomPicker
                     label="ПРОФЕСИЯ"
-                    selectedValue={profileInfo.profession}
+                    selectedValue={userCharacteristic.profession}
                     onValueChange={(value) =>
-                      setProfileInfo({ ...profileInfo, profession: value })
+                      setUserCharacteristic({
+                        ...userCharacteristic,
+                        profession: value,
+                      })
                     }
                     options={professionOptions}
                   />
@@ -256,9 +233,12 @@ const Register = () => {
                   <Text style={styles.label}>ИНТЕРЕСИ</Text>
                   <CustomPicker
                     label="ИНТЕРЕСИ"
-                    selectedValue={profileInfo.belief}
+                    selectedValue={userCharacteristic.belief}
                     onValueChange={(value) =>
-                      setProfileInfo({ ...profileInfo, belief: value })
+                      setUserCharacteristic({
+                        ...userCharacteristic,
+                        belief: value,
+                      })
                     }
                     options={beliefsOptions}
                   />
@@ -281,9 +261,9 @@ const Register = () => {
                   <Text style={styles.label}>ДЪРЖАВА</Text>
                   <CustomPicker
                     label="ДЪРЖАВА"
-                    selectedValue={profileInfo.country}
+                    selectedValue={userLocation.country}
                     onValueChange={(value) =>
-                      setProfileInfo({ ...profileInfo, country: value })
+                      setUserLocation({ ...userLocation, country: value })
                     }
                     options={countriesOptions}
                   />
@@ -292,9 +272,9 @@ const Register = () => {
                   <Text style={styles.label}>ГРАД</Text>
                   <CustomPicker
                     label="ГРАД"
-                    selectedValue={profileInfo.city}
+                    selectedValue={userLocation.city}
                     onValueChange={(value) =>
-                      setProfileInfo({ ...profileInfo, city: value })
+                      setUserLocation({ ...userLocation, city: value })
                     }
                     options={townOptions}
                   />
@@ -305,9 +285,9 @@ const Register = () => {
                   <Text style={styles.label}>РАЙОН</Text>
                   <CustomPicker
                     label="РАЙОН"
-                    selectedValue={profileInfo.district}
+                    selectedValue={userLocation.district}
                     onValueChange={(value) =>
-                      setProfileInfo({ ...profileInfo, district: value })
+                      setUserLocation({ ...userLocation, district: value })
                     }
                     options={regionOptions}
                   />
@@ -316,9 +296,9 @@ const Register = () => {
                   <Text style={styles.label}>КВАРТАЛ</Text>
                   <CustomPicker
                     label="КВАРТАЛ"
-                    selectedValue={profileInfo.neighborhood}
+                    selectedValue={userLocation.area}
                     onValueChange={(value) =>
-                      setProfileInfo({ ...profileInfo, neighborhood: value })
+                      setUserLocation({ ...userLocation, area: value })
                     }
                     options={districtOptions}
                   />
@@ -332,20 +312,20 @@ const Register = () => {
                 <View style={{ width: "70%" }}>
                   <CustomTextInput
                     label="УЛИЦА"
-                    value={profileInfo.street}
+                    value={userLocation.street}
                     mode="text"
                     onChangeText={(text) =>
-                      setProfileInfo({ ...profileInfo, street: text })
+                      setUserLocation({ ...userLocation, street: text })
                     }
                   />
                 </View>
                 <View style={{ width: "26%" }}>
                   <CustomTextInput
                     label="№"
-                    value={profileInfo.streetNumber}
+                    value={userLocation.houseNumber}
                     mode="numeric"
                     onChangeText={(text) =>
-                      setProfileInfo({ ...profileInfo, streetNumber: text })
+                      setUserLocation({ ...userLocation, houseNumber: text })
                     }
                   />
                 </View>
@@ -353,11 +333,9 @@ const Register = () => {
               <View style={{ width: "96%", margin: "auto" }}>
                 <CustomTextInput
                   label="ЕЛ. ПОЩА ЗА КОМУНИКАЦИЯ"
-                  value={profileInfo.email}
+                  value={user?.email || ""}
                   mode="email"
-                  onChangeText={(text) =>
-                    setProfileInfo({ ...profileInfo, email: text })
-                  }
+                  editable={false}
                 />
               </View>
             </View>
