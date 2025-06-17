@@ -58,6 +58,12 @@ const Register = () => {
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
+    if (user?.isCharacteristicFilled) {
+      router.replace("/(tabs)/questions");
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (user) {
       setProfileImage(user.photoFileUrl || null);
       setPhotoFileName(user.photoFileName || null);

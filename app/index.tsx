@@ -1,14 +1,23 @@
 import { Text, View, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import GradientButton from "@/components/GradientButton";
 import { useRouter } from "expo-router";
 import Logo from "@/components/Logo";
 import { FlatList } from "react-native";
 import { Colors } from "@/constants/Colors";
 import Check from "@/assets/images/check.svg";
+import { useAuth } from "@/context/AuthContext";
 
 const IndexScreen = () => {
   const router = useRouter();
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      router.replace("/(tabs)/questions");
+    }
+  }, [user]);
 
   const data: string[] = [
     "Регистрация в Платформата",

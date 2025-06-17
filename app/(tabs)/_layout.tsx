@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { router, Tabs } from "expo-router";
 import { Text } from "react-native";
 
@@ -12,9 +12,18 @@ import OpinionsWhiteIcon from "../../assets/images/opinions-white.svg";
 import ProfileIcon from "../../assets/images/svg/profile.svg";
 import ProfileWhiteIcon from "../../assets/images/svg/profile_white.svg";
 import Logo from "@/components/Logo";
-import { useGlobalSearchParams } from "expo-router";
+import { useAuth } from "@/context/AuthContext";
 
 const _layout = () => {
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      router.replace("/");
+    }
+  }, [user]);
+
+  if (!user) return null;
   return (
     <Tabs
       screenOptions={({ route }) => ({

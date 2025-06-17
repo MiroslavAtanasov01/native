@@ -33,6 +33,13 @@ const PreregisterScreen = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (user?.isCharacteristicFilled) {
+      router.replace("/(tabs)/questions");
+    }
+  }, [user]);
+
+  if (user) return null;
   return (
     <ScrollView
       style={styles.scrollView}

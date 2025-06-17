@@ -3,11 +3,9 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { StatusBar } from "react-native";
 import { QuestionProvider } from "@/context/QuestionContext";
-import { AuthProvider, useAuth } from "@/context/AuthContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function RootLayout() {
-  const auth = useAuth();
-  const user = auth?.user;
   return (
     <AuthProvider>
       <QuestionProvider>
