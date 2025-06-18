@@ -10,7 +10,6 @@ import { AddUserOpinion } from "@/services/UserOpinion";
 import { useLocalSearchParams } from "expo-router";
 import {
   uploadCivilControlFile,
-  UploadPhotoResponse,
   uploadCivilControl,
 } from "@/services/uploadCIvilControlFile";
 
@@ -31,17 +30,16 @@ const Opinions = () => {
     try {
       if (imageUri) {
         const response = await uploadCivilControlFile(imageUri as string);
-        const fileName =
-          typeof response === "string"
-            ? response
-            : (response as UploadPhotoResponse).name;
+        const { name, url } =
+          typeof response === "string" ? JSON.parse(response) : response;
 
         Alert.alert("Успех!", "Снимката е добавена успешно.");
 
         await uploadCivilControl({
           title: topicText,
           text: opinionText,
-          photoFIleName: fileName,
+          photoFIleName: name,
+          photoFileUrl: url,
         });
       } else {
         await AddUserOpinion({ title: topicText, text: opinionText });
