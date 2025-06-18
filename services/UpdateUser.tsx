@@ -11,6 +11,5 @@ export const updateUser = async (payload: UpdateUserPayload) => {
 
   return patch<User, UpdateUserPayload>("/api/User", payload, {
     Authorization: `Bearer ${token}`,
-    "Accept-Language": "bg",
   });
 };

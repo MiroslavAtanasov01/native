@@ -3,38 +3,40 @@ import { IconType } from "@/types/types";
 export const ageRanges: Array<{ label: string; value: string }> = [
   { label: "18-24", value: "From18to24" },
   { label: "25-29", value: "From25to29" },
-  { label: "30-34", value: "From30to34" },
+  { label: "30-44", value: "From30to44" },
   { label: "45-49", value: "Over45" },
 ];
 
 export const ageRangesValues = {
   From18to24: "18-24",
   From25to29: "25-29",
-  From30to34: "30-34",
+  From30to34: "30-44",
   Over45: "45-49",
 };
 export const incomeRanges: Array<{ label: string; value: string }> = [
   { label: "1-1000", value: "From1to1000" },
   { label: "1001-3000", value: "From1001to3000" },
   { label: "3001-5000", value: "From3001to5000" },
-  { label: "Над 5000", value: "5001" },
+  { label: "Над 5000", value: "Over5001" },
 ];
 export const incomeRangesValues = {
   From1to1000: "1-1000",
   From1001to3000: "1001-3000",
   From3001to5000: "3001-5000",
-  5001: "Над 5000",
+  Over5001: "Над 5000",
 };
 
 export const genderOptions: Array<{ label: string; value: string }> = [
   { label: "", value: "" },
   { label: "Мъж", value: "Male" },
   { label: "Жена", value: "Female" },
+  { label: "Друго", value: "Other" },
 ];
 export const genderOptionsValues = {
   "": "",
   Male: "Мъж",
   Female: "Жена",
+  Other: "Друго",
 };
 
 export const professionOptions: Array<{ label: string; value: string }> = [

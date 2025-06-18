@@ -1,24 +1,33 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView, Alert } from "react-native";
 import Header from "@/components/Header";
 import GradientButton from "@/components/GradientButton";
 import CustomTextInput from "@/components/CustomTextInput";
 import { Colors } from "@/constants/Colors";
 import OpinionsListIcon from "@/assets/images/opinions-list.svg";
 import { router } from "expo-router";
+import { AddUserOpinion } from "@/services/UserOpinion";
 
 const Opinions = () => {
   const [opinionText, setOpinionText] = useState("");
   const [topicText, setTopicText] = useState("");
 
-  const sendOpinion = () => {
+  const sendOpinion = async () => {
     if (!opinionText || !topicText) {
-      // TODO send opinion to server
-      console.log("Opinion sent:", opinionText);
-      console.log("Topic sent:", topicText);
+      Alert.alert("Моля, попълнете всички полета за адрес.");
+      return;
+    }
+
+    try {
+      await AddUserOpinion({ title: topicText, text: opinionText });
+
+      Alert.alert("Успех!", "Мнението е изпратено.");
+      // router.navigate("/questions");
       setOpinionText("");
       setTopicText("");
-      router.navigate("/questions");
+    } catch (error) {
+      console.error("Failed to send opinion:", error);
+      Alert.alert("Грешка", "Възникна грешка при изпращане на мнението ви.");
     }
   };
 

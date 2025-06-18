@@ -9,6 +9,5 @@ export const getUser = async (): Promise<User> => {
 
   return get<User>("/api/User", {
     Authorization: `Bearer ${token}`,
-    "Accept-Language": "bg",
   });
 };
