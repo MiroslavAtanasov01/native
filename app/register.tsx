@@ -24,6 +24,7 @@ import OrangeMark from "@/assets/images/orange-mark.svg";
 import { useAuth } from "@/context/AuthContext";
 import { updateUser } from "@/services/UpdateUser";
 import { uploadPhoto } from "@/services/uploadUserPhoto";
+import { UploadPhotoResponse } from "@/services/uploadCIvilControlFile";
 
 const Register = () => {
   const auth = useAuth();
@@ -81,9 +82,13 @@ const Register = () => {
     setIsUploading(true);
 
     try {
-      const newFileName = await uploadPhoto(uri);
-      setPhotoFileName(newFileName);
-      console.log(newFileName);
+      const response = await uploadPhoto(uri);
+
+      const name =
+        typeof response === "string"
+          ? response
+          : (response as UploadPhotoResponse).name;
+      setPhotoFileName(name);
       Alert.alert("Успех", "Снимката е качена успешно.");
     } catch (error) {
       console.error("Failed to upload photo:", error);
