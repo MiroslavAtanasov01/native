@@ -8,6 +8,7 @@ import {
   ViewStyle,
   Platform,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { View } from "react-native";
@@ -19,6 +20,7 @@ interface GradientButtonProps {
   style: StyleProp<ViewStyle>;
   icon?: keyof typeof icons;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 const GradientButton: React.FC<GradientButtonProps> = ({
@@ -27,6 +29,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   style,
   icon,
   disabled,
+  loading,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
@@ -54,8 +57,14 @@ const GradientButton: React.FC<GradientButtonProps> = ({
         ]}
       >
         <View style={styles.container}>
-          <Text style={styles.text}>{title}</Text>
-          {icon && <Image source={icons[icon]} style={styles.image} />}
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff" />
+          ) : (
+            <>
+              <Text style={styles.text}>{title}</Text>
+              {icon && <Image source={icons[icon]} style={styles.image} />}
+            </>
+          )}
         </View>
       </LinearGradient>
     </TouchableOpacity>

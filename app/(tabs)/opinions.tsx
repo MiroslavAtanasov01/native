@@ -7,27 +7,55 @@ import { Colors } from "@/constants/Colors";
 import OpinionsListIcon from "@/assets/images/opinions-list.svg";
 import { router } from "expo-router";
 import { AddUserOpinion } from "@/services/UserOpinion";
+import { useLocalSearchParams } from "expo-router";
+import {
+  uploadCivilControlFile,
+  UploadPhotoResponse,
+  uploadCivilControl,
+} from "@/services/uploadCIvilControlFile";
 
 const Opinions = () => {
   const [opinionText, setOpinionText] = useState("");
   const [topicText, setTopicText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { imageUri } = useLocalSearchParams();
 
   const sendOpinion = async () => {
     if (!opinionText || !topicText) {
-      Alert.alert("Моля, попълнете всички полета за адрес.");
+      Alert.alert("Моля, попълнете всички полета.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      await AddUserOpinion({ title: topicText, text: opinionText });
+      if (imageUri) {
+        const response = await uploadCivilControlFile(imageUri as string);
+        const fileName =
+          typeof response === "string"
+            ? response
+            : (response as UploadPhotoResponse).name;
+
+        Alert.alert("Успех!", "Снимката е добавена успешно.");
+
+        await uploadCivilControl({
+          title: topicText,
+          text: opinionText,
+          photoFIleName: fileName,
+        });
+      } else {
+        await AddUserOpinion({ title: topicText, text: opinionText });
+      }
 
       Alert.alert("Успех!", "Мнението е изпратено.");
-      // router.navigate("/questions");
       setOpinionText("");
       setTopicText("");
+      router.replace("/questions");
     } catch (error) {
-      console.error("Failed to send opinion:", error);
+      console.error("Error submitting opinion:", error);
       Alert.alert("Грешка", "Възникна грешка при изпращане на мнението ви.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,6 +119,7 @@ const Opinions = () => {
       <GradientButton
         title="ИЗПРАТИ СВОЕТО МНЕНИЕ"
         onPress={sendOpinion}
+        loading={loading}
         style={{ marginVertical: 10, marginHorizontal: 25 }}
       />
     </ScrollView>
