@@ -1,22 +1,4 @@
-import { ImageSourcePropType } from "react-native";
-
 export type IconType = "heart" | "questionMark" | "arrow";
-
-interface AnswerOption {
-  id: string;
-  text?: string;
-  imageUrl?: string;
-  localImageSource?: ImageSourcePropType;
-}
-
-export interface Question {
-  campaignId: string;
-  themeId: string;
-  questionId: string;
-  questionText: string;
-  options: AnswerOption[];
-  hasImageOptions?: boolean;
-}
 
 export interface UserStatistic {
   questionsTotal: number;

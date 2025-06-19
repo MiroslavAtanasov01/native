@@ -45,19 +45,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headerText: {
-    fontSize: 14,
+    fontSize: 18,
     color: Colors.secondary,
   },
   headerTextBlack: {
-    fontSize: 14,
+    fontSize: 18,
     color: "black",
   },
   questionText: {
-    fontSize: 20,
+    fontSize: 23,
     fontWeight: "bold",
     color: Colors.primary,
     textAlign: "center",
     marginBottom: 20,
+    marginTop: 10,
+    textTransform: "uppercase",
   },
   optionsContainer: {
     width: "100%",

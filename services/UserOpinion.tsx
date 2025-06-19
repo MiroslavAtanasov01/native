@@ -1,5 +1,4 @@
 import { post } from "@/services/api";
-import { getAuthToken } from "@/utils/getToken";
 
 interface AddUserOpinionReq {
   title: string;
@@ -7,13 +6,5 @@ interface AddUserOpinionReq {
 }
 
 export const AddUserOpinion = async (payload: AddUserOpinionReq) => {
-  const token = await getAuthToken();
-
-  if (!token) {
-    throw new Error("No auth token found");
-  }
-
-  await post<{}, AddUserOpinionReq>("/api/UserOpinion", payload, {
-    Authorization: `Bearer ${token}`,
-  });
+  await post<{}, AddUserOpinionReq>("/api/UserOpinion", payload);
 };

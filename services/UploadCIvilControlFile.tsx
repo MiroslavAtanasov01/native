@@ -1,5 +1,4 @@
 import { post } from "@/services/api";
-import { getAuthToken } from "@/utils/getToken";
 
 export interface UploadPhotoResponse {
   name: string;
@@ -7,11 +6,6 @@ export interface UploadPhotoResponse {
 }
 
 export const uploadCivilControlFile = async (uri: string): Promise<string> => {
-  const token = await getAuthToken();
-  if (!token) {
-    throw new Error("No auth token found");
-  }
-
   const formData = new FormData();
 
   const filename = uri.split("/").pop() || "photo.jpg";
@@ -26,10 +20,7 @@ export const uploadCivilControlFile = async (uri: string): Promise<string> => {
 
   const response = await post<UploadPhotoResponse, FormData>(
     "/upload/image",
-    formData,
-    {
-      Authorization: `Bearer ${token}`,
-    }
+    formData
   );
 
   return response.name;
@@ -43,13 +34,5 @@ interface civilControlReq {
 }
 
 export const uploadCivilControl = async (payload: civilControlReq) => {
-  const token = await getAuthToken();
-
-  if (!token) {
-    throw new Error("No auth token found");
-  }
-
-  return post<{}, civilControlReq>("/api/User", payload, {
-    Authorization: `Bearer ${token}`,
-  });
+  return post<{}, civilControlReq>("/api/User", payload);
 };

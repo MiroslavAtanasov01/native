@@ -1,3 +1,5 @@
+import { getAuthToken } from "@/utils/getToken";
+
 type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 const BASE_URL = "https://api.citizens.asicsoft.ru";
 
@@ -5,11 +7,12 @@ interface FetchOptions {
   method: HttpMethod;
   body?: object;
   headers?: Record<string, string>;
+  skipAuth?: boolean;
 }
 
 const customFetch = async <T>(
   url: string,
-  { method, body, headers = {} }: FetchOptions
+  { method, body, headers = {}, skipAuth = false }: FetchOptions
 ): Promise<T> => {
   const isFormData = body instanceof FormData;
 
@@ -19,6 +22,14 @@ const customFetch = async <T>(
       ...headers,
     },
   };
+
+  if (!skipAuth) {
+    const token = await getAuthToken();
+    if (!token) throw new Error("No auth token found");
+    (config.headers as Record<string, string>)[
+      "Authorization"
+    ] = `Bearer ${token}`;
+  }
 
   if (body) {
     if (isFormData) {
@@ -58,7 +69,7 @@ export const get = async <Res>(
 
 export const post = async <Res, Req extends object>(
   url: string,
-  body: Req,
+  body?: Req,
   headers?: Record<string, string>
 ): Promise<Res> => {
   return customFetch<Res>(url, { method: "POST", body, headers });

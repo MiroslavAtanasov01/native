@@ -22,7 +22,7 @@ import SelectableButtonGroup from "@/components/SelectableButtonGroup";
 import { Colors } from "@/constants/Colors";
 import OrangeMark from "@/assets/images/orange-mark.svg";
 import { useAuth } from "@/context/AuthContext";
-import { updateUser } from "@/services/UpdateUser";
+import { updateUser } from "@/services/Users";
 import { uploadPhoto } from "@/services/uploadUserPhoto";
 import { UploadPhotoResponse } from "@/services/uploadCIvilControlFile";
 

@@ -21,7 +21,7 @@ import Gender from "@/assets/images/profile/gender.svg";
 import Interests from "@/assets/images/profile/interests.svg";
 import Profession from "@/assets/images/profile/profession.svg";
 import { useAuth } from "@/context/AuthContext";
-import { getUser } from "@/services/GetUser";
+import { getUser } from "@/services/Users";
 
 const Profile = () => {
   const { user, signOut, signIn } = useAuth();
