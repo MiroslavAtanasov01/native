@@ -5,4 +5,5 @@ export const Colors = {
   warning: "#E30613",
   info: "#E47E1A",
   gray: "#D7D8D9",
+  red: "#E30613",
 };

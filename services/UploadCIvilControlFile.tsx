@@ -37,6 +37,7 @@ export const uploadCivilControlFile = async (uri: string): Promise<string> => {
 
 interface civilControlReq {
   photoFIleName: string;
+  photoFileUrl: string;
   title: string;
   text: string;
 }

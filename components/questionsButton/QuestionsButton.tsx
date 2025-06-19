@@ -11,6 +11,7 @@ import React, { ReactNode } from "react";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import ArrowR from "@/assets/images/right-arrow.svg";
+import { Notification } from "@/types/types";
 
 interface QuestionsButtonProps {
   title: string;
@@ -18,6 +19,7 @@ interface QuestionsButtonProps {
   onPress?: (event: GestureResponderEvent) => void;
   style?: StyleProp<TextStyle>;
   icon: ReactNode;
+  newNotifications?: Notification[];
 }
 
 const QuestionsButton: React.FC<QuestionsButtonProps> = ({
@@ -26,6 +28,7 @@ const QuestionsButton: React.FC<QuestionsButtonProps> = ({
   onPress,
   style,
   icon,
+  newNotifications,
 }) => {
   return (
     <TouchableOpacity
@@ -39,6 +42,14 @@ const QuestionsButton: React.FC<QuestionsButtonProps> = ({
           <Text style={styles.text}>{title}</Text>
           <Text style={style}>{text}</Text>
         </View>
+        {newNotifications && newNotifications.some((n) => !n.isRead) && (
+          <View style={styles.redIcon}>
+            <Text style={styles.redNumber}>
+              {newNotifications.filter((n) => !n.isRead).length}
+            </Text>
+            <Text style={styles.redText}>НОВИ</Text>
+          </View>
+        )}
       </View>
 
       <LinearGradient

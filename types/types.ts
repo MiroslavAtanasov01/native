@@ -64,3 +64,11 @@ export interface User {
   userLocation: UserLocation;
   userStatistic: UserStatistic;
 }
+
+export interface Notification {
+  id: string;
+  title: string;
+  text: string;
+  dateTime: string;
+  isRead: boolean;
+}

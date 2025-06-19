@@ -41,6 +41,24 @@ const styles = StyleSheet.create({
     height: 27,
     resizeMode: "contain",
   },
+  redIcon: {
+    width: 40,
+    height: 40,
+    backgroundColor: Colors.red,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 20,
+  },
+  redText: {
+    color: "white",
+    fontSize: 10,
+  },
+  redNumber: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
 
 export default styles;

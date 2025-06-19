@@ -12,10 +12,27 @@ import Box from "@/assets/images/box.svg";
 import Lamp from "@/assets/images/lamp.svg";
 import Speaker from "@/assets/images/speaker.svg";
 import Glass from "@/assets/images/glass.svg";
+import { useEffect } from "react";
+import { getNotifications } from "@/services/Notifications";
+import { Notification } from "@/types/types";
 
 const questions = () => {
   const [picture, setPicture] = useState<string | null>(null);
   const { openCamera } = useCamera(setPicture);
+  const [newNotifications, setNewNotifications] = useState<Notification[]>([]);
+
+  useEffect(() => {
+    const loadNotifications = async () => {
+      try {
+        const notifications = await getNotifications("new");
+        setNewNotifications(notifications);
+      } catch (error) {
+        console.error("Failed to load notifications:", error);
+      }
+    };
+
+    loadNotifications();
+  }, []);
 
   return (
     <View>
@@ -29,6 +46,7 @@ const questions = () => {
           onPress={() => router.navigate("/questions/question")}
           style={styles.subTItle1}
           icon={<Speaker height={45} width={45} />}
+          newNotifications={newNotifications}
         />
         <QuestionsButton
           title="МНЕНИЯ"
