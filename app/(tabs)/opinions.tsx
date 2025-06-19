@@ -11,7 +11,7 @@ import { useLocalSearchParams } from "expo-router";
 import {
   uploadCivilControlFile,
   uploadCivilControl,
-} from "@/services/uploadCIvilControlFile";
+} from "@/services/UploadCIvilControlFile";
 
 const Opinions = () => {
   const [opinionText, setOpinionText] = useState("");

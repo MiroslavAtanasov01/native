@@ -23,8 +23,8 @@ import { Colors } from "@/constants/Colors";
 import OrangeMark from "@/assets/images/orange-mark.svg";
 import { useAuth } from "@/context/AuthContext";
 import { updateUser } from "@/services/Users";
-import { uploadPhoto } from "@/services/uploadUserPhoto";
-import { UploadPhotoResponse } from "@/services/uploadCIvilControlFile";
+import { uploadPhoto } from "@/services/UploadUserPhoto";
+import { UploadPhotoResponse } from "@/services/UploadCIvilControlFile";
 
 const Register = () => {
   const auth = useAuth();
