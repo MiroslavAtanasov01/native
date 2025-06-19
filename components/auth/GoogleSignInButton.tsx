@@ -138,5 +138,3 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
-
-// async function verifyGoogleToken(token) { /* ... server-side logic ... */ }
